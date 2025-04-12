@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Editar Questão</title>
+</head>
+    
+<header>
+  <nav class="navbar" style="background-color: rgb(53, 74, 136);">
+    <div class="container-fluid">
+    <div class="d-flex">
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          1º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemáti</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          2º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemática</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          3º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemática</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          4º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemática</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          5º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemática</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          6º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemática</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          7º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemática</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          8º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemática</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          9º Ano
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Matemática</a>
+          <a class="dropdown-item" href="#">Outra ação</a>
+          <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+        </div>
+      </div>
+    </div>
+     <a href="/" class="text-white">Home</a>
+    <button class="btn bg-primary"><a href="/registrar" class="text-white"> Registrar questão</a></button>
+  </nav>
+</header>
+<body style="background-color: rgb(202, 202, 202);">
+  <main class="d-flex flex-column align-items-center"> 
+    <div class="d-flex flex-column align-items-center col-9 p-4 mt-5 shadow rounded" style="background-color: rgb(136, 150, 192);">
+      <h1 class="m-1 text-center text-white">Editar Questão</h1>
+     <div class="bg-dark rounded">
+       <form action="/editar" method="POST" enctype="multipart/form-data" class=" mt-2 p-2 rounded">
+      <input type="hidden" name="id" value="{{id}}">
+      <input type="hidden" name="nameImageDir" value="{{nameImageDir}}">
+      <div class="d-flex m-2">
+        <div class="form-group w-25 m-2">
+          <label for="exampleInputPassword1" class="text-white">Ensino</label>
+          <input
+            type="text"
+            value="{{elementarySchool}}"
+            name="elementarySchool"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="form-group w-25 m-2">
+          <label for="exampleInputPassword1" class="text-white">Ano Escolar</label>
+          <input
+            type="text"
+            value="{{schoolYear}}"
+            name="schoolYear"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="form-group w-25 m-2 ">
+        <label for="exampleInputPassword1" class="text-white">Disciplina</label>
+        <input
+          type="text"
+          value="{{displice}}"
+          name="displice"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+        </div>
+        <div class="form-group w-25 m-2">
+          <label for="exampleInputPassword1" class="text-white">Assunto</label>
+          <input
+            type="text"
+            value="{{subject}}"
+            name="subject"
+
+            class="form-control"
+            id="assunto"
+          />
+        </div>
+      </div>
+
+   
+  <div class="d-flex m-2">
+    <div class="d-flex flex-column w-50">
+      <div class="form-group m-1">
+        <label for="exampleFormControlTextarea1" class="text-white" >Pergunta:</label>
+        <textarea class="form-control" name="question"  rows="4">{{question}}</textarea>
+      </div>
+      <div class="form-group m-1">
+        <label for="exampleFormControlTextarea1" class="text-white" >Resposta</label>
+        <input
+          type="text"
+          value="{{answer}}"
+          name="answer"
+          class="form-control"
+          id="resposta"
+        />
+    </div>
+    
+    </div>
+    <div class="d-flex flex-column w-50">
+      <div class="bg-white m-1 text-center">
+        <img src="{{image}}" id="imageQuestion" alt=" sem imagem" class="w-50 m-2">
+      </div>
+      
+    </div>
+  </div>
+
+     <div class="m-2 d-flex">
+      <div class="form-group w-50 m-1">
+          <label for="exampleInputPassword1" class="text-white" >Alternativa A</label>
+          <input
+            type="text"
+            value="{{alternativeA}}"
+            name="altA"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="form-group w-50 m-1">
+          <label for="exampleInputPassword1" class="text-white">Alternativa B</label>
+          <input
+            type="text"
+            value="{{alternativeB}}"
+            name="altB"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+    </div>
+    <div class="m-2 d-flex">
+        <div class="form-group w-50 m-1">
+          <label for="exampleInputPassword1" class="text-white">Alternativa C</label>
+          <input
+            type="text"
+            value="{{alternativeC}}"
+            name="altC"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="form-group w-50 m-1">
+          <label for="exampleInputPassword1" class="text-white">Alternativa D</label>
+          <input
+            type="text"
+            value="{{alternativeD}}"
+            name="altD"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+    </div>
+    
+    <div class="w-100 d-flex justify-content-center">
+      <input type="file" name="imageUpdate" id="file" class="form-control-file text-white m-1">
+      <input class="btn m-2 text-white col-2" type="submit" value="Salvar" style="background-color: rgb(40, 107, 38);">
+      
+    </div>
+  </form>
+  
+    </div>
+    </div>
+  </div>
+  </main>
+</body>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</html>
+{{!-- <script src="/index.js" type="module"></script> --}}
+
+{{!-- <script>
+  const demo = document.querySelector('#btn');
+  const file = document.querySelector('#file')
+  const image = document.querySelector('#imageQuestion')
+  demo.addEventListener('click', teste);
+  
+  function teste(){
+    image.src = URL.createObjectURL(file.files[0]);
+    //document.querySelector('#demo2').textContent = file.size;
+    document.querySelector('#demo2').textContent = file.files[0];
+  }
+</script> --}}
