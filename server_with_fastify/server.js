@@ -15,6 +15,7 @@ import route_deletar from "./routes/route_deletar/routes.js";
 import routes_editar from "./routes/routes_editar/routes.js";
 import route_home from "./routes/route_home/routes.js";
 import route_feedback from "./routes/routes_feedbacks/routes.js";
+import route_report_resum from "./routes/routes_report_resum/routes.js";
 
 const fastify = Fastify({
   logger: false,
@@ -41,6 +42,7 @@ fastify.register(route_deletar);
 fastify.register(routes_editar);
 fastify.register(route_home);
 fastify.register(route_feedback);
+fastify.register(route_report_resum);
 
 fastify.get("/questoes", async (req, reply) => {
   try {
