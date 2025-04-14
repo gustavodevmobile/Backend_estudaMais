@@ -1,62 +1,34 @@
 import "dotenv/config";
 import nodemailer from "nodemailer";
 import pdf from "pdfkit";
+import { ReportGenerator } from "../utils/ReportGenerator.js";
 
 export const sendToEmail = async (req, reply) => {
-  const { reportCorrects, reportIncorrects, email } = req.body;
-  try {
-    const doc = new pdf();
-    const pdfBuffer = [];
-    doc.on("data", (chunk) => pdfBuffer.push(chunk));
-    doc.on("end", async () => {
-      const pdfData = Buffer.concat(pdfBuffer);
-      const transporter = nodemailer.createTransport({
-        service: "Gmail",
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-      const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: "Relatório de resumo de questões",
-        text: "Envio de relatório de desempenho",
-        attachments: [
-          {
-            filename: "relatorio.pdf",
-            content: pdfData,
-          },
-        ],
-      };
-      await transporter.sendMail(mailOptions);
-      reply.code(200).send("Relatório enviado com sucesso!");
-    });
+  const {
+    reportDataCorrects,
+    amountCorrects,
+    reportDataIncorrects,
+    amountIncorrects,
+    email,
+  } = req.body;
+  if (!email) {
+    reply.send("Email não informado");
+  }
 
-    doc.text("Relatório de Corretas");
-    doc.moveDown();
-    reportCorrects.forEach((item) => {
-      doc.text(`Ano Escolar: ${item.schoolYear}`);
-      doc.text(`Disciplina: ${item.discipline}`);
-      doc.text(`Assunto: ${item.subject}`);
-      doc.text(`Data: ${item.date}`);
-      doc.text(`Hora: ${item.hours}`);
-      doc.moveDown();
-    });
-    reportIncorrects.forEach((item) => {
-        doc.text(`Ano Escolar: ${item.schoolYear}`);
-        doc.text(`Disciplina: ${item.discipline}`);
-        doc.text(`Assunto: ${item.subject}`);
-        doc.text(`Data: ${item.date}`);
-        doc.text(`Hora: ${item.hours}`);
-        doc.moveDown();
-      });
-    doc.end();
-    console.log("E-mail enviado com sucesso!");
+  try {
+    const reportGenerator = new ReportGenerator(
+      email,
+      reportDataCorrects,
+      amountCorrects,
+      reportDataIncorrects,
+      amountIncorrects
+    );
+    const pdfData = await reportGenerator.generatePDF();
+    await reportGenerator.sendEmail(pdfData);
+
+    reply.code(200).send("Relatório enviado com sucesso!");
   } catch (error) {
-    reply
-      .code(500)
-      .send("Algo deu errado ao enviar o feedback: " + error.message);
+    reply.code(500).send("Erro ao enviar relatório: " + error.message);
     console.error("Erro ao enviar e-mail:", error.message);
   }
 };
