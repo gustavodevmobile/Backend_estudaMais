@@ -1,11 +1,10 @@
 import Fastify from "fastify";
 import fastifyView from "@fastify/view";
-import fastifyPostgres from "@fastify/postgres";
 import handlebars from "handlebars";
 import fastifyMultipart from "@fastify/multipart";
 import "dotenv/config";
-import Database from "./models/Questions.js"
-import Admin from "./models/Admin.js"
+import Database from "./models/Questions.js";
+import Admin from "./models/Admin.js";
 import fastifyFormbody from "@fastify/formbody";
 import fastifyCookie from "@fastify/cookie";
 import routes_matematica from "./routes/routes_matematica/routes.js";
@@ -20,7 +19,7 @@ import route_home from "./routes/route_home/routes.js";
 import route_feedback from "./routes/routes_feedbacks/routes.js";
 import route_report_resum from "./routes/routes_report_resum/routes.js";
 import route_admin from "./routes/adminRoutes/routes.js";
-import logoutRoute from "./routes/logout/route.js"
+import logoutRoute from "./routes/logout/route.js";
 
 const fastify = Fastify({
   logger: false,
@@ -124,7 +123,7 @@ fastify.get("/questoes/:disciplines", async (req, reply) => {
     }
     return reply.send(listResult);
   } catch (err) {
-      console.log(err);
+    console.log(err);
     return reply.send(err);
   }
 });

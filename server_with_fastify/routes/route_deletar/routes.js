@@ -1,19 +1,24 @@
 import { deletar } from "../../controllers/deletar.js";
+import { verifyToken } from "../../controllers/middleware.js";
 
 async function route_deletar(fastify, options) {
-  fastify.get("/deletar/:id/:nameImageDir", {
-    schema: {
-      params: {
-        type: "object",
-        properties: {
-          id: { type: "string" },
-          nameImageDir: { type: "string" },
+  fastify.get(
+    "/deletar/:id/:nameImageDir",
+    {
+      preHandler: verifyToken,
+      schema: {
+        params: {
+          type: "object",
+          properties: {
+            id: { type: "string" },
+            nameImageDir: { type: "string" },
+          },
+          required: ["id", "nameImageDir"],
         },
-        required: ["id", "nameImageDir"],
       },
-    },
-    handler: deletar,
-  });
+      handler: deletar,
+    }
+  );
 }
 
 export default route_deletar;

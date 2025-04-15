@@ -10,7 +10,7 @@
     />
     <title>Login Admin</title>
   </head>
-  <body class="bg-primary">
+  <body  style="background: linear-gradient(to right, #6a11cb, #2575fc); height: 100vh;">
     <main>
       <div
         class="container d-flex justify-content-center align-items-center"
@@ -24,7 +24,6 @@
               method="POST"
               enctype="application/x-www-form-urlencoded"
               action="/admin/login"
-              onsubmit="this.querySelector('.spinner-border').classList.remove('d-none'); this.querySelector('button').disabled = true;"
             >
               <div class="form-group">
                 <label for="username">Admin</label>
@@ -49,26 +48,16 @@
                 />
               </div>
 
-              {{! <button
+              <button
                 type="submit"
                 class="btn btn-primary btn-block"
-              >Entrar</button> }}
-              <button class="btn btn-primary" type="submit">
-                <span class="spinner-border spinner-border-sm text-success " role="status" aria-hidden="true"></span>
-                <span role="status">Entrar</span>
-              </button>
+              >Entrar</button>
 
               {{#if messege}}
                 <div
                   class="alert alert-danger mt-3 p-1 text-center"
                   role="alert"
                 >{{messege}}
-                </div>
-              {{else}}
-                <div
-                  class="alert alert-success mt-3 p-1 text-center d-done"
-                  role="alert"
-                >Logando...
                 </div>
               {{/if}}
             </form>
@@ -94,5 +83,5 @@
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"
   ></script>
-  <script src="../login.js"></script>
+  {{! <script src="/login.js"></script> }}
 </html>
