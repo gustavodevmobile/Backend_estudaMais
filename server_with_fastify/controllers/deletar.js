@@ -1,6 +1,6 @@
 import fs from "fs";
 import "dotenv/config";
-import Database from "../database/database.js";
+import Database from "../models/Questions.js"
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);

@@ -1,6 +1,6 @@
 import fs from "fs";
 import "dotenv/config";
-import Database from "../database/database.js";
+import Database from "../models/Questions.js"
 
 export const home = async (req, reply) => {
   try {

@@ -1,5 +1,5 @@
 
-import Database from "../database/database.js";
+import Database from "../models/Questions.js"
 
 
 const renderCiencias = async (req, reply, discipline, schoolYear) => {

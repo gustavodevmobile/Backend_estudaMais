@@ -1,4 +1,4 @@
-import Database from "../database/database.js";
+import Database from "../models/Questions.js"
 let amountQuestions;
 let discipline;
 let schoolYear;

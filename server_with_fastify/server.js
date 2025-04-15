@@ -4,7 +4,10 @@ import fastifyPostgres from "@fastify/postgres";
 import handlebars from "handlebars";
 import fastifyMultipart from "@fastify/multipart";
 import "dotenv/config";
-import Database from "./database/database.js";
+import Database from "./models/Questions.js"
+import Admin from "./models/Admin.js"
+import fastifyFormbody from "@fastify/formbody";
+import fastifyCookie from "@fastify/cookie";
 import routes_matematica from "./routes/routes_matematica/routes.js";
 import routes_portugues from "./routes/routes_portugues/routes.js";
 import routes_geografia from "./routes/routes_geografia/routes.js";
@@ -16,10 +19,17 @@ import routes_editar from "./routes/routes_editar/routes.js";
 import route_home from "./routes/route_home/routes.js";
 import route_feedback from "./routes/routes_feedbacks/routes.js";
 import route_report_resum from "./routes/routes_report_resum/routes.js";
+import route_admin from "./routes/adminRoutes/routes.js";
+import logoutRoute from "./routes/logout/route.js"
 
 const fastify = Fastify({
   logger: false,
 });
+fastify.register(fastifyCookie, {
+  secret: process.env.COOKIE_SECRET, // Chave para assinar cookies
+  parseOptions: {}, // Opções adicionais para parsing de cookies
+});
+
 fastify.register(fastifyMultipart);
 
 fastify.register(fastifyView, {
@@ -28,10 +38,10 @@ fastify.register(fastifyView, {
   propertyName: "render",
 });
 
-fastify.register(fastifyPostgres, {
-  connectionString: process.env.URL,
-});
-
+// fastify.register(fastifyPostgres, {
+//   connectionString: process.env.URL,
+// });
+fastify.register(fastifyFormbody);
 fastify.register(routes_matematica);
 fastify.register(routes_portugues);
 fastify.register(routes_geografia);
@@ -43,7 +53,8 @@ fastify.register(routes_editar);
 fastify.register(route_home);
 fastify.register(route_feedback);
 fastify.register(route_report_resum);
-
+fastify.register(route_admin);
+fastify.register(logoutRoute);
 fastify.get("/questoes", async (req, reply) => {
   try {
     await Database.findAll().then((result) => {

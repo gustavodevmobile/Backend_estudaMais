@@ -2,7 +2,7 @@
 import fsSync, { access } from "fs";
 import fs from "fs/promises";
 import "dotenv/config";
-import Database from "../database/database.js";
+import Database from "../models/Questions.js"
 import { fileURLToPath } from "url";
 import path from "path";
 const __filename = fileURLToPath(import.meta.url);
