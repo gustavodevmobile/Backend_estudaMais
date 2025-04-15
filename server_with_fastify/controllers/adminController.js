@@ -30,7 +30,7 @@ export const screen_login = async (req, reply) => {
 
 export const loginAdmin = async (req, reply) => {
   const { username, password } = req.body;
-  //console.log("logando...");
+ 
   try {
     // Verifica se o usuário existe
     const admin = await Admin.findOne({ where: { username } });
