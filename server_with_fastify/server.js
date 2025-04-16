@@ -4,7 +4,6 @@ import handlebars from "handlebars";
 import fastifyMultipart from "@fastify/multipart";
 import "dotenv/config";
 import Database from "./models/Questions.js";
-import Admin from "./models/Admin.js";
 import fastifyFormbody from "@fastify/formbody";
 import fastifyCookie from "@fastify/cookie";
 import routes_matematica from "./routes/routes_matematica/routes.js";
@@ -20,6 +19,10 @@ import route_feedback from "./routes/routes_feedbacks/routes.js";
 import route_report_resum from "./routes/routes_report_resum/routes.js";
 import route_admin from "./routes/adminRoutes/routes.js";
 import logoutRoute from "./routes/logout/route.js";
+import { fileURLToPath } from "url";
+import path from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const fastify = Fastify({
   logger: false,
@@ -33,6 +36,7 @@ fastify.register(fastifyMultipart);
 
 fastify.register(fastifyView, {
   engine: { handlebars: handlebars },
+  root: path.join(__dirname, "templates"), 
   viewExt: "handlebars",
   propertyName: "render",
 });
