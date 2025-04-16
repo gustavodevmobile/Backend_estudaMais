@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server_with_fastify/server.js"
+    "start": "node server_with_fastify/server.js",
+    "build": "mkdir -p templates && cp ./login.handlebars templates/"
   },
   "author": "",
   "license": "ISC",
