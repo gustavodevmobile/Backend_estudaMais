@@ -4,7 +4,7 @@ import Admin from "../models/Admin.js";
 import "dotenv/config";
 
 export const screen_login = async (req, reply) => {
-  return await reply.render("templates/login");
+  return await reply.render("login");
 };
 // export const registerAdmin = async (req, reply) => {
 //   const { username, password } = req.body;
@@ -35,13 +35,13 @@ export const loginAdmin = async (req, reply) => {
     // Verifica se o usuário existe
     const admin = await Admin.findOne({ where: { username } });
     if (!admin) {
-      return reply.render('templates/login', {messege: "Usuário não existe" });
+      return reply.render('login', {messege: "Usuário não existe" });
     }
 
     // Verifica a senha
     const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch) {
-      return reply.render('templates/login', {messege: "Usuário ou senha incorreta." });
+      return reply.render('login', {messege: "Usuário ou senha incorreta." });
     }
 
     // Gera o token JWT
@@ -60,6 +60,6 @@ export const loginAdmin = async (req, reply) => {
     return reply.redirect('/');
   } catch (err) {
     console.error(err);
-    return reply.render('templates/login', {messege: "Erro ao fazer login." });
+    return reply.render('login', {messege: "Erro ao fazer login." });
   }
 };

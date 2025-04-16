@@ -31,7 +31,7 @@ fastify.register(fastifyCookie, {
   secret: process.env.COOKIE_SECRET, // Chave para assinar cookies
   parseOptions: {}, // Opções adicionais para parsing de cookies
 });
-
+console.log("Templates root:", path.join(__dirname, "templates"));
 fastify.register(fastifyMultipart);
 
 fastify.register(fastifyView, {
