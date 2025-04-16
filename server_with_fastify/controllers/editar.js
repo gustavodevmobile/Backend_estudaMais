@@ -92,7 +92,7 @@ export const screen_editar_questao = (req, reply) => {
       const imageBase64 = result["dataValues"]["image"].toString("base64");
       result["dataValues"]["image"] = imageBase64;
 
-      reply.render("templates/editar", {
+      reply.render("editar", {
         id: result.id,
         elementarySchool: result.elementarySchool,
         schoolYear: result.schoolYear,

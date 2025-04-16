@@ -12,7 +12,7 @@ export const home = async (req, reply) => {
         nameImage.push(element["dataValues"]["nameImageDir"]);
       });
       //console.log(result.length);
-      return reply.render("templates/home", {
+      return reply.render("home", {
         question: result,
         length: result.length,
       });

@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const screen_cadastrar_questao = async (req, reply) => {
-  return await reply.render("templates/cadastrar");
+  return await reply.render("cadastrar");
 };
 
 export const cadastrar_questao = async function (req, reply) {
