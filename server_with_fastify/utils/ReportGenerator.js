@@ -25,12 +25,15 @@ export class ReportGenerator {
     doc.moveDown();
 
     doc.fontSize(20).fillColor("blue").text(`Usuário: ${this.userName}`, { align: "start" });
-    doc.moveDown();
+    //doc.moveDown();
 
     doc.fontSize(18).fillColor("blue").text(`Data de Nascimento: ${this.birthDate}`, { align: "start" });
-    doc.moveDown();
+    //doc.moveDown();
 
     doc.fontSize(18).fillColor("blue").text(`Ano Escolar: ${this.schoolYear}`, { align: "start" });
+    doc.moveDown();
+
+    doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
     doc.moveDown();
 
     doc.fontSize(20).fillColor("blue").text("Questões respondidas corretamente", { align: "center" });
