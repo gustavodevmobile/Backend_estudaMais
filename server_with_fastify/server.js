@@ -31,12 +31,11 @@ fastify.register(fastifyCookie, {
   secret: process.env.COOKIE_SECRET, // Chave para assinar cookies
   parseOptions: {}, // Opções adicionais para parsing de cookies
 });
-console.log("Templates root:", path.join(__dirname, "templates"));
 fastify.register(fastifyMultipart);
 
 fastify.register(fastifyView, {
   engine: { handlebars: handlebars },
-  root: path.join(__dirname, "templates"), 
+  root: path.join(__dirname, "templates"),
   viewExt: "handlebars",
   propertyName: "render",
 });
@@ -58,16 +57,6 @@ fastify.register(route_feedback);
 fastify.register(route_report_resum);
 fastify.register(route_admin);
 fastify.register(logoutRoute);
-// fastify.get("/questoes", async (req, reply) => {
-//   try {
-//     await Database.findAll().then((result) => {
-//       return reply.send(result);
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     return reply.send(err);
-//   }
-// });
 
 fastify.get("/disciplinas", async (req, reply) => {
   var listDisciplines = [];
@@ -86,26 +75,6 @@ fastify.get("/disciplinas", async (req, reply) => {
     return reply.send(err);
   }
 });
-
-// fastify.get("/anos", async (req, reply) => {
-//   var listAnos = [];
-//   var listResult = [];
-//   try {
-//     var result = await Database.findAll({ attributes: ["schoolYear"] });
-//     for (var i in result) {
-//       listResult.push(result[i].dataValues.schoolYear);
-//     }
-//     var listSet = new Set(listResult);
-//     var list = Array.from(listSet);
-//     for (var i in list) {
-//       listAnos.push({ ano: list[i] });
-//     }
-//     return reply.send(listAnos);
-//   } catch (err) {
-//     console.log(err);
-//     return reply.send(err);
-//   }
-// });
 
 fastify.get("/questoes/:disciplines", async (req, reply) => {
   const disciplinesListJson = req.params.disciplines;
@@ -136,7 +105,7 @@ fastify.get("/questao/:idQuestion", async (req, reply) => {
   var listResult = [];
   var idsJson = req.params.idQuestion;
   var idsQuestion = JSON.parse(idsJson);
-  console.log("$idQuestion", idsQuestion);
+
   try {
     for (var i in idsQuestion) {
       await Database.findByPk(idsQuestion[i]).then((result) => {
@@ -145,7 +114,6 @@ fastify.get("/questao/:idQuestion", async (req, reply) => {
     }
     return reply.send(listResult);
   } catch (err) {
-    console.log(err);
     return reply.send(err);
   }
 });
@@ -162,5 +130,3 @@ fastify.listen(
 );
 
 //https://backend-estudamais-4ebn.onrender.com
-
-
