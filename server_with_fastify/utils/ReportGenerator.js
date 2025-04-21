@@ -3,10 +3,11 @@ import nodemailer from "nodemailer";
 import pdf from "pdfkit";
 
 export class ReportGenerator {
-  constructor(userName, birthDate, schoolYear,email, reportDataCorrects, amountCorrects, reportDataIncorrects, amountIncorrects) {
-    this.userName = userName,
-    this.birthDate = birthDate,
-    this.schoolYear = schoolYear,
+  constructor(userName, birthDate, schoolYear, amountAnswered ,email, reportDataCorrects, amountCorrects, reportDataIncorrects, amountIncorrects) {
+    this.userName = userName;
+    this.birthDate = birthDate;
+    this.schoolYear = schoolYear;
+    this.amountAnswered = amountAnswered;
     this.email = email;
     this.reportDataCorrects = reportDataCorrects;
     this.amountCorrects = amountCorrects;
@@ -21,16 +22,17 @@ export class ReportGenerator {
     doc.on("data", (chunk) => this.pdfBuffer.push(chunk));
     doc.on("end", () => console.log("PDF gerado com sucesso!"));
 
-    doc.fontSize(25).text("Relatório de Desempenho", { align: "center" });
-    doc.moveDown();
+    doc.fontSize(25).fillColor("blue").text("Relatório de Desempenho", { align: "center" });
 
-    doc.fontSize(20).text(`Usuário: ${this.userName}`, { align: "start" });
-    //doc.moveDown();
+    doc.fillColor("black").moveDown();
+    
+    doc.fontSize(20).text(`Usuário: ${this.userName}`);
 
-    doc.fontSize(18).text(`Data de Nascimento: ${this.birthDate}`, { align: "start" });
-    //doc.moveDown();
+    doc.fontSize(18).text(`Data de Nascimento: ${this.birthDate}`);
+    
+    doc.fontSize(18).text(`Ano Escolar: ${this.schoolYear}`);
 
-    doc.fontSize(18).fillColor("blue").text(`Ano Escolar: ${this.schoolYear}`, { align: "start" });
+    doc.fontSize(20).text(`Total de respondidas: ${this.amountAnswered}`);
     doc.moveDown();
 
     doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
