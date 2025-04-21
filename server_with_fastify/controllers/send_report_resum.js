@@ -35,6 +35,7 @@ export const sendToEmail = async (req, reply) => {
 
     reply.code(200).send("Relatório enviado com sucesso!");
   } catch (error) {
+    console.log(error);
     reply.code(500).send("Erro ao enviar relatório: " + error.message);
   }
 };
