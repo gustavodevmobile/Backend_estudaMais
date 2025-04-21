@@ -21,13 +21,13 @@ export class ReportGenerator {
     doc.on("data", (chunk) => this.pdfBuffer.push(chunk));
     doc.on("end", () => console.log("PDF gerado com sucesso!"));
 
-    doc.fontSize(25).fillColor("blue").text("Relatório de Desempenho", { align: "center" });
+    doc.fontSize(25).text("Relatório de Desempenho", { align: "center" });
     doc.moveDown();
 
-    doc.fontSize(20).fillColor("blue").text(`Usuário: ${this.userName}`, { align: "start" });
+    doc.fontSize(20).text(`Usuário: ${this.userName}`, { align: "start" });
     //doc.moveDown();
 
-    doc.fontSize(18).fillColor("blue").text(`Data de Nascimento: ${this.birthDate}`, { align: "start" });
+    doc.fontSize(18).text(`Data de Nascimento: ${this.birthDate}`, { align: "start" });
     //doc.moveDown();
 
     doc.fontSize(18).fillColor("blue").text(`Ano Escolar: ${this.schoolYear}`, { align: "start" });
