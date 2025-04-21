@@ -3,6 +3,9 @@ import { ReportGenerator } from "../utils/ReportGenerator.js";
 
 export const sendToEmail = async (req, reply) => {
   const {
+    userName,
+    birthDate,
+    schoolYear,
     reportDataCorrects,
     amountCorrects,
     reportDataIncorrects,
@@ -16,6 +19,9 @@ export const sendToEmail = async (req, reply) => {
 
   try {
     const reportGenerator = new ReportGenerator(
+      userName,
+      birthDate,
+      schoolYear,
       email,
       reportDataCorrects,
       amountCorrects,

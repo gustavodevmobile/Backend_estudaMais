@@ -3,7 +3,10 @@ import nodemailer from "nodemailer";
 import pdf from "pdfkit";
 
 export class ReportGenerator {
-  constructor(email, reportDataCorrects, amountCorrects, reportDataIncorrects, amountIncorrects) {
+  constructor(userName, birthDate, schoolYear,email, reportDataCorrects, amountCorrects, reportDataIncorrects, amountIncorrects) {
+    this.userName = userName,
+    this.birthDate = birthDate,
+    this.schoolYear = schoolYear,
     this.email = email;
     this.reportDataCorrects = reportDataCorrects;
     this.amountCorrects = amountCorrects;
@@ -19,6 +22,15 @@ export class ReportGenerator {
     doc.on("end", () => console.log("PDF gerado com sucesso!"));
 
     doc.fontSize(25).fillColor("blue").text("Relatório de Desempenho", { align: "center" });
+    doc.moveDown();
+
+    doc.fontSize(20).fillColor("blue").text(`Usuário: ${this.userName}`, { align: "start" });
+    doc.moveDown();
+
+    doc.fontSize(18).fillColor("blue").text(`Data de Nascimento: ${this.birthDate}`, { align: "start" });
+    doc.moveDown();
+
+    doc.fontSize(18).fillColor("blue").text(`Ano Escolar: ${this.schoolYear}`, { align: "start" });
     doc.moveDown();
 
     doc.fontSize(20).fillColor("blue").text("Questões respondidas corretamente", { align: "center" });
