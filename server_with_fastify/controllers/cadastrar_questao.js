@@ -12,15 +12,20 @@ export const screen_cadastrar_questao = async (req, reply) => {
 };
 
 export const cadastrar_questao = async function (req, reply) {
-  const imagePath = path.resolve(__dirname, "../images/" + req.file.filename);
+  
   let image;
   let filename;
-  console.log("req.file.filename", req.file.filename);
+  //console.log("req.file.filename", req.file.filename);
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
     image = req.body.image;
     filename = null;
   } else {
+    const imagePath = path.resolve(__dirname, "../images/" + req.file.filename);
+    
+    if (!fs.existsSync(imagePath)) {
+      fs.mkdirSync(imagePath, { recursive: true });
+    }
     image = fs.readFileSync(imagePath);
     filename = req.file.filename;
   }
