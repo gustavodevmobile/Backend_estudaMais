@@ -31,6 +31,7 @@ fastify.register(fastifyCookie, {
   secret: process.env.COOKIE_SECRET, // Chave para assinar cookies
   parseOptions: {}, // Opções adicionais para parsing de cookies
 });
+
 fastify.register(fastifyMultipart, {
   limits:{
     fileSize: 10* 1024 * 1024,
