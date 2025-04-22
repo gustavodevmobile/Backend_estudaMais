@@ -15,22 +15,24 @@ export const cadastrar_questao = async function (req, reply) {
   let image;
   let filename;
   console.log("req.file.filename", req.file.filename);
-  console.log('req.file', req.file)
+  //console.log('req.file', req.file)
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
     image = req.body.image;
     filename = null;
   } else {
     try {
+      const dirPath = path.resolve(__dirname,"../images/");
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+        console.log("Diretório criado:", dirPath);
+      }
       const imagePath = path.resolve(
         __dirname,
         "../images/" + req.file.filename
       );
       console.log(imagePath);
-      if (!fs.existsSync(imagePath)) {
-        fs.mkdirSync(path.dirname(imagePath), { recursive: true });
-      }
-      
+
       image = fs.readFileSync(imagePath);
       filename = req.file.filename;
     } catch (e) {
