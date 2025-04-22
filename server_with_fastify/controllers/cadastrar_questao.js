@@ -12,7 +12,7 @@ export const screen_cadastrar_questao = async (req, reply) => {
 };
 
 export const cadastrar_questao = async function (req, reply) {
-  const imagePath = path.resolve(__dirname, "/images/" + req.file.filename);
+  const imagePath = path.resolve(__dirname, "../images/" + req.file.filename);
   let image;
   let filename;
   //console.log("req.file.filename", req.file.filename);
