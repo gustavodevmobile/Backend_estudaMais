@@ -15,7 +15,7 @@ export const cadastrar_questao = async function (req, reply) {
   const imagePath = path.resolve(__dirname, "../images/" + req.file.filename);
   let image;
   let filename;
-  //console.log("req.file.filename", req.file.filename);
+  console.log("req.file.filename", req.file.filename);
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
     image = req.body.image;
