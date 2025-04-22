@@ -26,6 +26,7 @@ export const cadastrar_questao = async function (req, reply) {
         __dirname,
         "../images/" + req.file.filename
       );
+      console.log(imagePath);
       if (!fs.existsSync(imagePath)) {
         fs.mkdirSync(path.dirname(imagePath), { recursive: true });
       }
