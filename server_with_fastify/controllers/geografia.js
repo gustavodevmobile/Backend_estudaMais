@@ -16,7 +16,7 @@ const renderGeografia = async (req, reply, discipline, schoolYear) => {
         amountQuestions = result.length;
       });
 
-      return reply.render("templates/disciplines", {
+      return reply.render("disciplines", {
         question: result,
         amount: amountQuestions,
         discipline: discipline,
