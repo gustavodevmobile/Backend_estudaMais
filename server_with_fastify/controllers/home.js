@@ -18,7 +18,7 @@ export const home = async (req, reply) => {
       });
     });
     //console.log("nameImage", nameImage);
-    fs.readdir("../images/", { withFileTypes: true }, (err, files) => {
+    fs.readdir("./images/", { withFileTypes: true }, (err, files) => {
       files.map((el) => {
         if (nameImage.includes(el.name)) {
           //console.log('existe', el.name)
@@ -26,6 +26,10 @@ export const home = async (req, reply) => {
           fs.unlinkSync("./images/" + el.name);
         }
       });
+      if(err){
+        console.log('Erro ao ler arquivo', err)
+        return
+      }
     });
   } catch (err) {
     console.log(err);
