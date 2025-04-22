@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const screen_cadastrar_questao = async (req, reply) => {
+  console.log('aqui')
   return await reply.render("cadastrar");
 };
 
@@ -15,33 +16,26 @@ export const cadastrar_questao = async function (req, reply) {
   let image;
   let filename;
 
-  console.log('req.file', req.file)
+  //console.log("req.file", req.file);
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
     image = req.body.image;
     filename = null;
   } else {
     try {
-      const imagePath = path.resolve(__dirname + "../images/" + req.file.filename);
-      if (!fs.existsSync(imagePath)) {
-        fs.mkdirSync(imagePath, { recursive: true });
-        console.log("Diretório criado:", imagePath);
-      }else{
-        console.log("Diretório já foi criado:", imagePath);
-      }
+      //const file = await req.file();
+      const imagePath = path.resolve(
+        __dirname, "../images/" + req.file.filename
+      );
+      console.log('imagePath', imagePath)
+      // if (!fs.existsSync(imagePath)) {
+      //   fs.mkdirSync(imagePath, { recursive: true });
+      //   console.log("Diretório criado:", imagePath);
+      // } else {
+      //   console.log("Diretório já foi criado:", imagePath);
+      // }
 
-      fs.readFile(imagePath, (err, buffer)=>{
-        if (err) {
-          console.error('Erro ao ler o arquivo:', err);
-          return;
-        }
-        image = buffer;
-        console.log('Arquivo convertido!')
-        
-      });
-      
-      const file = req.file();
-     image = await file.toBuffer(); 
+      image = fs.readFileSync(imagePath);
       filename = req.file.filename;
     } catch (e) {
       console.error(`Erro ao salvar a imagem: ${e}`);
@@ -49,7 +43,7 @@ export const cadastrar_questao = async function (req, reply) {
     }
   }
   // Obtenha o arquivo enviado
-  
+
   try {
     await Database.create({
       elementarySchool: req.body.elementarySchool,
