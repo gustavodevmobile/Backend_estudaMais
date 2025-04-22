@@ -1,7 +1,7 @@
 import fs from "fs";
 
 import "dotenv/config";
-import Database from "../models/Questions.js"
+import Database from "../models/Questions.js";
 import { fileURLToPath } from "url";
 import path from "path";
 const __filename = fileURLToPath(import.meta.url);
@@ -12,7 +12,6 @@ export const screen_cadastrar_questao = async (req, reply) => {
 };
 
 export const cadastrar_questao = async function (req, reply) {
-  
   let image;
   let filename;
   //console.log("req.file.filename", req.file.filename);
@@ -21,8 +20,11 @@ export const cadastrar_questao = async function (req, reply) {
     image = req.body.image;
     filename = null;
   } else {
-    const imagePath = path.resolve(__dirname, "../images/" + req.file.filename);
-    try{
+    try {
+      const imagePath = path.resolve(
+        __dirname,
+        "../images/" + req.file.filename
+      );
       if (!fs.existsSync(imagePath)) {
         fs.mkdirSync(path.dirname(imagePath), { recursive: true });
       }
@@ -30,10 +32,10 @@ export const cadastrar_questao = async function (req, reply) {
       image = req.file.filename;
       filename = req.file.filename;
       //image = fs.readFileSync(imagePath);
-    // filename = req.file.filename;
-    }catch(e){
+      // filename = req.file.filename;
+    } catch (e) {
       console.error(`Erro ao salvar a imagem: ${e}`);
-      return reply.code(500).send({ error:`Erro ao salvar iamgem ${e}` });
+      return reply.code(500).send({ error: `Erro ao salvar iamgem ${e}` });
     }
   }
 
@@ -59,4 +61,3 @@ export const cadastrar_questao = async function (req, reply) {
     return reply.send(err);
   }
 };
-
