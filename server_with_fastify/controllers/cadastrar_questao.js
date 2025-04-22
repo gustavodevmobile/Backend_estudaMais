@@ -12,40 +12,40 @@ export const screen_cadastrar_questao = async (req, reply) => {
 };
 
 export const cadastrar_questao = async function (req, reply) {
+  let image;
   let filename;
-
-  try {
-    // Verifica se o arquivo foi enviado
-    const file = await req.file();
-    if (file) {
-      // Nome do arquivo
-      filename = file.filename;
-
-      // Caminho onde a imagem será salva
-      const imagePath = path.resolve(__dirname, "../images", filename);
-
-      // Cria o diretório, se necessário
-      if (!fs.existsSync(path.dirname(imagePath))) {
+  console.log("req.file.filename", req.file.filename);
+  console.log('req.file', req.file)
+  if (!req.file || !req.file.filename) {
+    req.body.image = "sem imagem";
+    image = req.body.image;
+    filename = null;
+  } else {
+    try {
+      const imagePath = path.resolve(
+        __dirname,
+        "../images/" + req.file.filename
+      );
+      if (!fs.existsSync(imagePath)) {
         fs.mkdirSync(path.dirname(imagePath), { recursive: true });
       }
-
-      // Converte o stream em buffer e salva o arquivo
-      const buffer = await file.toBuffer();
-      fs.writeFileSync(imagePath, buffer);
-      console.log("Arquivo salvo com sucesso:", imagePath);
-    } else {
-      console.log("Nenhum arquivo enviado");
-      filename = null;
+      
+      image = fs.readFileSync(imagePath);
+      filename = req.file.filename;
+    } catch (e) {
+      console.error(`Erro ao salvar a imagem: ${e}`);
+      return reply.code(500).send({ error: `Erro ao salvar iamgem ${e}` });
     }
+  }
 
-    // Salva os dados no banco de dados
+  try {
     await Database.create({
       elementarySchool: req.body.elementarySchool,
       schoolYear: req.body.schoolYear,
       displice: req.body.displice,
       subject: req.body.subject,
       question: req.body.question,
-      image: filename ? filename : "sem imagem",
+      image: image,
       nameImageDir: filename,
       answer: req.body.answer,
       alternativeA: req.body.altA,
@@ -53,59 +53,10 @@ export const cadastrar_questao = async function (req, reply) {
       alternativeC: req.body.altC,
       alternativeD: req.body.altD,
     });
-
     console.log("Cadastrado com sucesso");
     return reply.redirect("/");
   } catch (err) {
-    console.error("Erro ao salvar questão ou imagem:", err);
-    return reply.code(500).send({ error: "Erro ao salvar questão ou imagem" });
+    console.log(err);
+    return reply.send(err);
   }
-  // let image;
-  // let filename;
-  // //console.log("req.file.filename", req.file.filename);
-  // if (!req.file || !req.file.filename) {
-  //   req.body.image = "sem imagem";
-  //   image = req.body.image;
-  //   filename = null;
-  // } else {
-  //   try {
-  //     const imagePath = path.resolve(
-  //       __dirname,
-  //       "../images/" + req.file.filename
-  //     );
-  //     if (!fs.existsSync(imagePath)) {
-  //       fs.mkdirSync(path.dirname(imagePath), { recursive: true });
-  //     }
-  //     fs.writeFileSync(imagePath);
-  //     image = req.file.filename;
-  //     filename = req.file.filename;
-  //     //image = fs.readFileSync(imagePath);
-  //     // filename = req.file.filename;
-  //   } catch (e) {
-  //     console.error(`Erro ao salvar a imagem: ${e}`);
-  //     return reply.code(500).send({ error: `Erro ao salvar iamgem ${e}` });
-  //   }
-  // }
-
-  // try {
-  //   await Database.create({
-  //     elementarySchool: req.body.elementarySchool,
-  //     schoolYear: req.body.schoolYear,
-  //     displice: req.body.displice,
-  //     subject: req.body.subject,
-  //     question: req.body.question,
-  //     image: image,
-  //     nameImageDir: filename,
-  //     answer: req.body.answer,
-  //     alternativeA: req.body.altA,
-  //     alternativeB: req.body.altB,
-  //     alternativeC: req.body.altC,
-  //     alternativeD: req.body.altD,
-  //   });
-  //   console.log("Cadastrado com sucesso");
-  //   return reply.redirect("/");
-  // } catch (err) {
-  //   console.log(err);
-  //   return reply.send(err);
-  // }
 };
