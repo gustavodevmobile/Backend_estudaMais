@@ -26,10 +26,10 @@ export const cadastrar_questao = async function (req, reply) {
       if (!fs.existsSync(imagePath)) {
         fs.mkdirSync(path.dirname(imagePath), { recursive: true });
       }
-      fs.writeFileSync(imagePath, await req.file.toBuffer());
+      fs.writeFileSync(imagePath);
       image = req.file.filename;
       filename = req.file.filename;
-    // image = fs.readFileSync(imagePath);
+      //image = fs.readFileSync(imagePath);
     // filename = req.file.filename;
     }catch(e){
       console.error(`Erro ao salvar a imagem: ${e}`);
