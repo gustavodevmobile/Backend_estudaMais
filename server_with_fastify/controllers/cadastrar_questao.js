@@ -32,7 +32,7 @@ export const cadastrar_questao = async function (req, reply) {
     // image = fs.readFileSync(imagePath);
     // filename = req.file.filename;
     }catch(e){
-      console.error("Erro ao salvar a imagem:", err);
+      console.error(`Erro ao salvar a imagem: ${e}`);
       return reply.code(500).send({ error:`Erro ao salvar iamgem ${e}` });
     }
   }
