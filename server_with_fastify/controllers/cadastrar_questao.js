@@ -22,12 +22,19 @@ export const cadastrar_questao = async function (req, reply) {
     filename = null;
   } else {
     const imagePath = path.resolve(__dirname, "../images/" + req.file.filename);
-    
-    if (!fs.existsSync(imagePath)) {
-      fs.mkdirSync(imagePath, { recursive: true });
+    try{
+      if (!fs.existsSync(imagePath)) {
+        fs.mkdirSync(path.dirname(imagePath), { recursive: true });
+      }
+      fs.writeFileSync(imagePath, await req.file.toBuffer());
+      image = req.file.filename;
+      filename = req.file.filename;
+    // image = fs.readFileSync(imagePath);
+    // filename = req.file.filename;
+    }catch(e){
+      console.error("Erro ao salvar a imagem:", err);
+      return reply.code(500).send({ error:`Erro ao salvar iamgem ${e}` });
     }
-    image = fs.readFileSync(imagePath);
-    filename = req.file.filename;
   }
 
   try {
