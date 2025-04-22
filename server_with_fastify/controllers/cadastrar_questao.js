@@ -22,17 +22,19 @@ export const cadastrar_questao = async function (req, reply) {
     filename = null;
   } else {
     try {
-      // const dirPath = path.resolve(__dirname, "../images/");
-      // if (!fs.existsSync(dirPath)) {
-      //   fs.mkdirSync(dirPath, { recursive: true });
-      //   console.log("Diretório criado:", dirPath);
-      // }
-      const imagePath = path.resolve(__dirname,"../images/"+ req.file.filename);
+      const imagePath = path.resolve(__dirname + "../images/" + req.file.filename);
+      if (!fs.existsSync(imagePath)) {
+        fs.mkdirSync(imagePath, { recursive: true });
+        console.log("Diretório criado:", imagePath);
+      }else{
+        console.log("Diretório já foi criado:", imagePath);
+      }
+      
       // console.log(imagePath);
 
       image = fs.readFileSync(imagePath);
       //const file = req.file();
-     // image = await file.toBuffer();
+     // image = await file.toBuffer(); 
       filename = req.file.filename;
     } catch (e) {
       console.error(`Erro ao salvar a imagem: ${e}`);
