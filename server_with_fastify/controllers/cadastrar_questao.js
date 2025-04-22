@@ -31,7 +31,7 @@ export const cadastrar_questao = async function (req, reply) {
       // console.log(imagePath);
 
       //image = fs.readFileSync(imagePath);
-      const file = req.file;
+      const file = req.file();
       image = await file.toBuffer();
       filename = req.file.filename;
     } catch (e) {

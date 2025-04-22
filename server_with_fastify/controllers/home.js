@@ -18,7 +18,7 @@ export const home = async (req, reply) => {
       });
     });
     //console.log("nameImage", nameImage);
-    fs.readdir("./images/", { withFileTypes: true }, (err, files) => {
+    fs.readdir("../images/", { withFileTypes: true }, (err, files) => {
       files.map((el) => {
         if (nameImage.includes(el.name)) {
           //console.log('existe', el.name)
