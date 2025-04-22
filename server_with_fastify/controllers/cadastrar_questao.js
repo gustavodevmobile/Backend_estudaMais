@@ -14,7 +14,7 @@ export const screen_cadastrar_questao = async (req, reply) => {
 export const cadastrar_questao = async function (req, reply) {
   let image;
   let filename;
-  console.log("req.file.filename", req.file.filename);
+
   //console.log('req.file', req.file)
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
@@ -22,16 +22,13 @@ export const cadastrar_questao = async function (req, reply) {
     filename = null;
   } else {
     try {
-      const dirPath = path.resolve(__dirname,"../images/");
-      if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath, { recursive: true });
-        console.log("Diretório criado:", dirPath);
-      }
-      const imagePath = path.resolve(
-        __dirname,
-        "../images/" + req.file.filename
-      );
-      console.log(imagePath);
+      // const dirPath = path.resolve(__dirname, "../images/");
+      // if (!fs.existsSync(dirPath)) {
+      //   fs.mkdirSync(dirPath, { recursive: true });
+      //   console.log("Diretório criado:", dirPath);
+      // }
+      // const imagePath = path.resolve(__dirname, req.file.filename);
+      // console.log(imagePath);
 
       image = fs.readFileSync(imagePath);
       filename = req.file.filename;
