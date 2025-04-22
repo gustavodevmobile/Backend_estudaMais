@@ -23,26 +23,26 @@ export const cadastrar_questao = async function (req, reply) {
   } else {
     try {
       const imagePath = path.resolve(__dirname + "../images/" + req.file.filename);
-      // if (!fs.existsSync(imagePath)) {
-      //   fs.mkdirSync(imagePath, { recursive: true });
-      //   console.log("Diretório criado:", imagePath);
-      // }else{
-      //   console.log("Diretório já foi criado:", imagePath);
-      // }
+      if (!fs.existsSync(imagePath)) {
+        fs.mkdirSync(imagePath, { recursive: true });
+        console.log("Diretório criado:", imagePath);
+      }else{
+        console.log("Diretório já foi criado:", imagePath);
+      }
 
-      // fs.readFile(imagePath, (err, buffer)=>{
-      //   if (err) {
-      //     console.error('Erro ao ler o arquivo:', err);
-      //     return;
-      //   }
-      //   image = buffer;
-      //   console.log('Arquivo convertido!')
+      fs.readFile(imagePath, (err, buffer)=>{
+        if (err) {
+          console.error('Erro ao ler o arquivo:', err);
+          return;
+        }
+        image = buffer;
+        console.log('Arquivo convertido!')
         
-      // });
+      });
       
-      //const file = req.file();
-     // image = await file.toBuffer(); 
-      //filename = req.file.filename;
+      const file = req.file();
+     image = await file.toBuffer(); 
+      filename = req.file.filename;
     } catch (e) {
       console.error(`Erro ao salvar a imagem: ${e}`);
       return reply.code(500).send({ error: `Erro ao salvar iamgem ${e}` });
