@@ -12,6 +12,8 @@ export const screen_cadastrar_questao = async (req, reply) => {
 };
 
 export const cadastrar_questao = async function (req, reply) {
+  let image;
+  let file
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
     const image = req.body.image;
@@ -35,26 +37,27 @@ export const cadastrar_questao = async function (req, reply) {
     return reply.redirect("/");
   } else {
     try {
-      const imageDir = path.join(__dirname, "../images/");
+      const imageDir = path.resolve(__dirname, "../images/" + req.file.filename);
 
       if (!fs.existsSync(imageDir)) {
         fs.mkdirSync(imageDir, { recursive: true });
         console.log("Diretório criado:", imageDir);
         fs.writeFileSync(imageDir, req.file.filename);
+        image = fs.readFileSync(imageDir); 
+        filename = req.file.filename;// Use req.file.buffer para salvar o 
       } else {
+        image = fs.readFileSync(imageDir); // Use req.file.buffer para salvar o 
+        filename = req.file.filename;// Use req.file.buffer para salvar o 
         console.log("Diretório já foi criado:", imageDir);
       }
 
-      const imagePath = path.join(imageDir, req.file.filename);
-
-      const buffer = fs.readFileSync(imagePath); // Use req.file.buffer para salvar o arquivo
-      console.log("buffer", buffer);
-      const image = buffer;
-      console.log("Imagem salva:", imagePath);
+      
+      console.log("image", image);
+      console.log("filename", filename);
 
       // Use o buffer da imagem
 
-      const filename = req.file.filename;
+      
       await Database.create({
         elementarySchool: req.body.elementarySchool,
         schoolYear: req.body.schoolYear,
