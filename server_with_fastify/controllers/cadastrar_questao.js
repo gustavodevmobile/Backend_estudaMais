@@ -14,6 +14,7 @@ export const screen_cadastrar_questao = async (req, reply) => {
 export const cadastrar_questao = async function (req, reply) {
   let image;
   let filename;
+ 
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
     const image = req.body.image;
@@ -37,26 +38,21 @@ export const cadastrar_questao = async function (req, reply) {
     return reply.redirect("/");
   } else {
     try {
-      const imageDir = path.resolve(
-        __dirname,
-        "../images/" + req.file.filename
-      );
+      console.log('req.file', req.file.file);
+      const imageDir = path.resolve(__dirname, "../images/");
+      const imagePath = path.join(imageDir, req.file.filename);
 
       if (!fs.existsSync(imageDir)) {
         fs.mkdirSync(imageDir, { recursive: true });
         console.log("Diretório criado:", imageDir);
         //fs.writeFileSync(imageDir, req.file.filename);
-      } else {
-        console.log("Diretório já foi criado:", imageDir);
-        //fs.writeFileSync(imageDir, req.file.filename);
       }
-
-      if (fs.existsSync(imageDir)) {
-        image = fs.readFileSync(imageDir); // Use req.file.buffer para salvar o
-        filename = req.file.filename; // Nome do arquivo enviado
-      }
-    
-      
+     
+      // Salve o buffer da imagem no diretório desejado
+      //fs.writeFileSync(imageDir, req.file.filename);
+      console.log("Imagem salva em:", imageDir);
+      image = fs.readFileSync(imagePath); // Use req.file.buffer para salvar o
+      filename = req.file.filename; // Nome do arquivo enviado
       console.log("image", image);
       console.log("filename", filename);
 
