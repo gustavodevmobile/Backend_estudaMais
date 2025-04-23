@@ -37,7 +37,7 @@ export const cadastrar_questao = async function (req, reply) {
       const imagePath = path.join(imageDir, req.file.filename);
 
       image = readFileSync(imagePath);
-      const buffer = Buffer.from(req.file.filename);
+      const buffer = Buffer.from(req.file);
       fs.writeFileSync(imagePath, buffer); // Use req.file.buffer para salvar o arquivo
       console.log("Imagem salva:", imagePath);
      
