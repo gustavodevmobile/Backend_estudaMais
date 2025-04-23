@@ -28,12 +28,12 @@ export const cadastrar_questao = async function (req, reply) {
         __dirname, "../images/" + req.file.filename
       );
       console.log('imagePath', imagePath)
-      // if (!fs.existsSync(imagePath)) {
-      //   fs.mkdirSync(imagePath, { recursive: true });
-      //   console.log("Diretório criado:", imagePath);
-      // } else {
-      //   console.log("Diretório já foi criado:", imagePath);
-      // }
+      if (!fs.existsSync(imagePath)) {
+        fs.mkdirSync(imagePath, { recursive: true });
+        console.log("Diretório criado:", imagePath);
+      } else {
+        console.log("Diretório já foi criado:", imagePath);
+      }
 
       image = fs.readFileSync(imagePath);
       filename = req.file.filename;
