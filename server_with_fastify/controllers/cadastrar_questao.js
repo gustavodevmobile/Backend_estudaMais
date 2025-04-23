@@ -24,7 +24,7 @@ export const cadastrar_questao = async function (req, reply) {
     try {
       //const file = await req.file();
       const imagePath = path.resolve(
-        __dirname, "../images/" + req.file.filename
+        __dirname, "../images/"
       );
       
       if (!fs.existsSync(imagePath)) {
