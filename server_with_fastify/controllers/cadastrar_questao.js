@@ -47,6 +47,8 @@ export const cadastrar_questao = async function (req, reply) {
         image = fs.readFileSync(imagePath); 
         filename = req.file.filename;// Use req.file.buffer para salvar o 
       } else {
+        fs.writeFileSync(imageDir, req.file.filename);
+        const imagePath = path.resolve(imageDir, req.file.filename);
         image = fs.readFileSync(imagePath); // Use req.file.buffer para salvar o 
         filename = req.file.filename;// Use req.file.buffer para salvar o 
         console.log("Diretório já foi criado:", imageDir);
