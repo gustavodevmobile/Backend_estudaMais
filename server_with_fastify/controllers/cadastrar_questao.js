@@ -39,22 +39,24 @@ export const cadastrar_questao = async function (req, reply) {
   } else {
     try {
       //const file = await req.file();
-      const imageDir = path.resolve(__dirname, "../images/");
-      const imageDirD = path.resolve(__dirname, "../images/" + req.file.filename);
+      //const imageDir = path.resolve(__dirname, "../images/");
+      //const imageDir = "../images/";
+      const imagePath = path.join(__dirname, "../images/" + req.file.filename);
+      console.log("imageDir", imagePath);
 
-      if (!fs.existsSync(imageDirD)) {
-        fs.mkdirSync(imageDirD, { recursive: true });
-        console.log("Diretório criado:", imageDirD); 
-      } else {
-        console.log("Diretório já foi criado:", imageDirD);
-      }
+      // if (!fs.existsSync(imageDir)) {
+      //   fs.mkdirSync(imageDir, { recursive: true });
+      //   console.log("Diretório criado:", imageDir); 
+      // } else {
+      //   console.log("Diretório já foi criado:", imageDir);
+      // }
 
       //const imagePath = path.join(imageDir, req.file.filename);
 
-      fs.writeFileSync(imageDir, req.file.filename);
+      //fs.writeFileSync(imageDir, req.file.filename);
       //console.log(req.image.buffer)
       //const buffer = fs.readFileSync(imagePath); // Use req.file.buffer para salvar o arquivo
-      const buffer = fs.readFileSync(imageDirD); // Use req.file.buffer para salvar o arquivo
+      const buffer = fs.readFileSync(imagePath); // Use req.file.buffer para salvar o arquivo
       console.log("buffer", buffer);
       const image = buffer;
       //console.log("Imagem salva:", imagePath);
