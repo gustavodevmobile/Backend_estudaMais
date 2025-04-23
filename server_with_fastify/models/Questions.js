@@ -25,9 +25,6 @@ const Question = sequelize.define("question", {
     image: {
       type: Sequelize.BLOB,
     },
-    nameImageDir: {
-      type: Sequelize.TEXT,
-    },
     answer: {
       type: Sequelize.TEXT,
     },
