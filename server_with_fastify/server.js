@@ -32,7 +32,11 @@ fastify.register(fastifyCookie, {
   parseOptions: {}, // Opções adicionais para parsing de cookies
 });
 
-fastify.register(fastifyMultipart);
+fastify.register(fastifyMultipart, {
+  limits: {
+    fileSize: 10 * 1024 * 1024, // Limite de tamanho do arquivo (10 MB) 
+  },
+});
 
 fastify.register(fastifyView, {
   engine: { handlebars: handlebars },
