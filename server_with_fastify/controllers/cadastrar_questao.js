@@ -13,7 +13,7 @@ export const screen_cadastrar_questao = async (req, reply) => {
 
 export const cadastrar_questao = async function (req, reply) {
   let image;
-  let file
+  let filename
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
     const image = req.body.image;
