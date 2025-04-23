@@ -1,5 +1,3 @@
-//import multer from "fastify-multer";
-import fsSync, { access } from "fs";
 import fs from "fs/promises";
 import "dotenv/config";
 import Database from "../models/Questions.js"

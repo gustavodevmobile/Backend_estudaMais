@@ -1,5 +1,5 @@
 import fs from "fs";
-
+import fsp from "fs/promises";
 import "dotenv/config";
 import Database from "../models/Questions.js";
 import { fileURLToPath } from "url";
@@ -14,6 +14,7 @@ export const screen_cadastrar_questao = async (req, reply) => {
 export const cadastrar_questao = async function (req, reply) {
   console.log("req.file.filname", req.file.filename);
   console.log("req.file", req.file);
+
   if (!req.file || !req.file.filename) {
     req.body.image = "sem imagem";
     const image = req.body.image;
@@ -50,7 +51,7 @@ export const cadastrar_questao = async function (req, reply) {
       const imagePath = path.join(imageDir, req.file.filename);
 
       fs.writeFileSync(imagePath, req.file.filename);
-      const buffer = fs.readFileSync(imagePath); // Use req.file.buffer para salvar o arquivo
+      const buffer = await fsp.readFile(imagePath); // Use req.file.buffer para salvar o arquivo
       console.log("buffer", buffer);
       const image = buffer;
       console.log("Imagem salva:", imagePath);
