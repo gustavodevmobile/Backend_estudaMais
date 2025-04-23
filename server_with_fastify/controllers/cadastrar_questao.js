@@ -23,19 +23,26 @@ export const cadastrar_questao = async function (req, reply) {
   } else {
     try {
       //const file = await req.file();
-      const imagePath = path.resolve(
-        __dirname ,"../images/" + req.file.filename
+      const imageDir = path.resolve(
+        __dirname ,"../images/"
       );
       
-      if (!fs.existsSync(imagePath)) {
-        fs.mkdirSync(imagePath, { recursive: true });
-        console.log("Diretório criado:", imagePath);
+      if (!fs.existsSync(imageDir)) {
+        fs.mkdirSync(imageDir, { recursive: true });
+        console.log("Diretório criado:", imageDir);
       } else {
-        console.log("Diretório já foi criado:", imagePath);
+        console.log("Diretório já foi criado:", imageDir);
       }
+
+      const imagePath = path.join(imageDir, req.file.filename);
+
+      const buffer = Buffer.from(req.file.filename)
+      fs.writeFileSync(imagePath, buffer); // Use req.file.buffer para salvar o arquivo
+      console.log("Imagem salva:", imagePath);
      
-      image = fs.readFileSync(imagePath);
-      //fs.writeFileSync(imagePath, image);
+      image = req.file.buffer; // Use o buffer da imagem
+
+      
       filename = req.file.filename;
     } catch (e) {
       console.error(`Erro ao salvar a imagem: ${e}`);
