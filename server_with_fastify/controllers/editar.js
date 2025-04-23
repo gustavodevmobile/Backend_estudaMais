@@ -6,16 +6,14 @@ import { readFileSync } from "fs";
 export const editar_questao = async (req, reply) => {
   let oldImage;
   let newImage;
-  let nameImageDirUpdated;
   try {
     const result = await Database.findByPk(req.body.id);
     oldImage = result.dataValues.image;
 
-    if (req.file) {
-      newImage = readFileSync(req.file.path);
-    } else {
+    if (!req.file.filename) {
       newImage = oldImage;
-      nameImageDirUpdated = null;
+    } else {
+      newImage = readFileSync(req.file.path);
     }
     await Database.update(
       {
@@ -42,7 +40,6 @@ export const editar_questao = async (req, reply) => {
 
 export const screen_editar_questao = async (req, reply) => {
   try {
-    
     const result = await Database.findByPk(req.params.id);
     const imageBase64 = result.image.toString("base64");
     result.image = imageBase64;
