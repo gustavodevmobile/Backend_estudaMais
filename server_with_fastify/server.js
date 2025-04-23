@@ -33,6 +33,7 @@ fastify.register(fastifyCookie, {
 });
 
 fastify.register(fastifyMultipart, {
+  //attachFieldsToBody: true,
   limits: {
     fileSize: 10 * 1024 * 1024, // Limite de tamanho do arquivo (10 MB) 
   },
