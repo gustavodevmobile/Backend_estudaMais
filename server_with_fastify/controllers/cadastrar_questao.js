@@ -37,16 +37,17 @@ export const cadastrar_questao = async function (req, reply) {
     return reply.redirect("/");
   } else {
     try {
-      const imageDir = path.resolve(__dirname, "../images/" + req.file.filename);
+      const imageDir = path.resolve(__dirname, "../images/");
 
       if (!fs.existsSync(imageDir)) {
         fs.mkdirSync(imageDir, { recursive: true });
         console.log("Diretório criado:", imageDir);
         fs.writeFileSync(imageDir, req.file.filename);
-        image = fs.readFileSync(imageDir); 
+        const imagePath = path.resolve(imageDir, req.file.filename);
+        image = fs.readFileSync(imagePath); 
         filename = req.file.filename;// Use req.file.buffer para salvar o 
       } else {
-        image = fs.readFileSync(imageDir); // Use req.file.buffer para salvar o 
+        image = fs.readFileSync(imagePath); // Use req.file.buffer para salvar o 
         filename = req.file.filename;// Use req.file.buffer para salvar o 
         console.log("Diretório já foi criado:", imageDir);
       }
