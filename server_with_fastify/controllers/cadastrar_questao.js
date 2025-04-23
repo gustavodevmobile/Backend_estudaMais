@@ -1,5 +1,5 @@
 import fs from "fs";
-import fsp from "fs/promises";
+//import fsp from "fs/promises";
 import "dotenv/config";
 import Database from "../models/Questions.js";
 import { fileURLToPath } from "url";
@@ -40,21 +40,24 @@ export const cadastrar_questao = async function (req, reply) {
     try {
       //const file = await req.file();
       const imageDir = path.resolve(__dirname, "../images/");
+      const imageDirD = path.resolve(__dirname, "../images/" + req.file.filename);
 
-      if (!fs.existsSync(imageDir)) {
-        fs.mkdirSync(imageDir, { recursive: true });
-        console.log("Diretório criado:", imageDir);
+      if (!fs.existsSync(imageDirD)) {
+        fs.mkdirSync(imageDirD, { recursive: true });
+        console.log("Diretório criado:", imageDirD); 
       } else {
-        console.log("Diretório já foi criado:", imageDir);
+        console.log("Diretório já foi criado:", imageDirD);
       }
 
-      const imagePath = path.join(imageDir, req.file.filename);
+      //const imagePath = path.join(imageDir, req.file.filename);
 
-      fs.writeFileSync(imagePath, req.file.filename);
-      const buffer = await fsp.readFile(imagePath); // Use req.file.buffer para salvar o arquivo
+      //fs.writeFileSync(imageDir, req.file.filename);
+      //console.log(req.image.buffer)
+      //const buffer = fs.readFileSync(imagePath); // Use req.file.buffer para salvar o arquivo
+      const buffer = fs.readFileSync(imageDirD); // Use req.file.buffer para salvar o arquivo
       console.log("buffer", buffer);
       const image = buffer;
-      console.log("Imagem salva:", imagePath);
+      //console.log("Imagem salva:", imagePath);
 
       // Use o buffer da imagem
 
