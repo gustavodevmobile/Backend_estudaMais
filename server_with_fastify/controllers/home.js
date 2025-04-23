@@ -7,14 +7,12 @@ export const home = async (req, reply) => {
     let nameImage = [];
     await Database.findAll().then((result) => {
       result.map((element) => {
-        if(element["dataValues"]["image"] != null){
-          const imageBase64 = element["dataValues"]["image"].toString("base64");
-          element["dataValues"]["image"] = imageBase64;
-          nameImage.push(element["dataValues"]["nameImageDir"]);
-        }
-        
+        const imageBase64 = element["dataValues"]["image"].toString("base64");
+        element["dataValues"]["image"] = imageBase64;
+        nameImage.push(element["dataValues"]["nameImageDir"]);
+        console.log(element);
       });
-      //console.log(result.length);
+      
       return reply.render("home", {
         question: result,
         length: result.length,
