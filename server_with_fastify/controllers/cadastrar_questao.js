@@ -24,7 +24,7 @@ export const cadastrar_questao = async function (req, reply) {
     try {
       //const file = await req.file();
       const imagePath = path.resolve(
-        __dirname, "../images/"
+        __dirname ,"../images/" + req.file.filename
       );
       
       if (!fs.existsSync(imagePath)) {
@@ -33,10 +33,9 @@ export const cadastrar_questao = async function (req, reply) {
       } else {
         console.log("Diretório já foi criado:", imagePath);
       }
-      const fileName = `${req.file.fileName}.png`
-      //image = fs.readFileSync(imagePath);
-      image = Buffer.from(fileName)
-      fs.writeFileSync(imagePath, fileName);
+     
+      image = fs.readFileSync(imagePath);
+      //fs.writeFileSync(imagePath, image);
       filename = req.file.filename;
     } catch (e) {
       console.error(`Erro ao salvar a imagem: ${e}`);
