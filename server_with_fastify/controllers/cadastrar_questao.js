@@ -2,7 +2,6 @@ import { readFileSync } from "fs";
 import "dotenv/config";
 import Database from "../models/Questions.js";
 
-
 export const screen_cadastrar_questao = async (req, reply) => {
   return await reply.render("cadastrar");
 };
@@ -11,14 +10,15 @@ export const cadastrar_questao = async function (req, reply) {
   let image;
 
   try {
-    const file = req.file; // Acessa o arquivo diretamente
-    if (file) {
+    console.log('req.file.filename', req.file.filename);
+    const file = req.file;
+    if (!req.file.filename) {
+      console.log("Nenhum arquivo enviado.");
+      image = "sem imagem";
+    } else {
       console.log("Arquivo recebido:", file);
       image = readFileSync(file.path); // Lê o arquivo diretamente do stream
       console.log("image", image);
-    } else {
-      console.log("Nenhum arquivo enviado.");
-      image = "sem imagem";
     }
 
     await Database.create({

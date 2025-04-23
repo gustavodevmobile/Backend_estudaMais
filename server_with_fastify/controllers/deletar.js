@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 export const deletar = (req, reply) => {
   const {id, nameImageDir} = req.params;
   const pathFile = path.resolve(__dirname, "../images/" + nameImageDir);
-  
+  console.log("pathFile", pathFile);
   try {
     if (fs.existsSync(pathFile) && fs.statSync(pathFile).isFile()) {
       fs.unlinkSync(pathFile);
