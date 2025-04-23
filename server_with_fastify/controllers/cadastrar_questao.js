@@ -8,7 +8,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const screen_cadastrar_questao = async (req, reply) => {
-  console.log('aqui')
   return await reply.render("cadastrar");
 };
 
@@ -36,6 +35,7 @@ export const cadastrar_questao = async function (req, reply) {
       }
 
       image = fs.readFileSync(imagePath);
+      fs.writeFileSync(imagePath, image);
       filename = req.file.filename;
     } catch (e) {
       console.error(`Erro ao salvar a imagem: ${e}`);
