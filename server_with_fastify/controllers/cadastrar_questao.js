@@ -13,10 +13,10 @@ export const cadastrar_questao = async function (req, reply) {
     console.log('req.file.filename', req.file.filename);
     const file = req.file;
     if (!req.file.filename) {
-      console.log("Nenhum arquivo enviado.");
+      //console.log("Nenhum arquivo enviado.");
       image = "sem imagem";
     } else {
-      console.log("Arquivo recebido:", file);
+      //console.log("Arquivo recebido:", file);
       image = readFileSync(file.path); // Lê o arquivo diretamente do stream
       console.log("image", image);
     }

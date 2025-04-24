@@ -146,12 +146,13 @@
   
   <body style="background-color: rgb(202, 202, 202);" >
     <h3 class="text-center mt-2">Quantidade de questões: {{length}}</h3>
+    
     <table class="table container table-bordered mt-2 bg-white rounded">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">id</th>
-        <th scope="col",style="width: 150px;">Ensino</th>
-        <th scope="col",style="width: 100px;">Ano</th>
+        <th scope="col">Id</th>
+        <th scope="col">Ensino</th>
+        <th scope="col">Ano</th>
         <th scope="col">Disciplina</th>
         <th scope="col">Assunto</th>
         <th scope="col">Pergunta</th>
@@ -160,6 +161,7 @@
         <th scope="col">Editar</th>
         <th scope="col">Deletar</th>
       </tr>
+      
     </thead>
     <tbody>
       {{#each question}}
