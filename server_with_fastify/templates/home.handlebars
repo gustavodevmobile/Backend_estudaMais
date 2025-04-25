@@ -135,7 +135,7 @@
           <a class="dropdown-item" href="/artes/9ano">Artes</a>
         </div>
       </div>
-    </div>
+    </div> 
     <a href="/" class="text-white">Home</a>
     <button class="btn bg-primary"><a href="/registrar" class="text-white"> Registrar questão</a></button>
     <form action="/admin/logout" enctype="application/x-www-form-urlencoded" method="post">
@@ -145,16 +145,51 @@
   </header>
   
   <body style="background-color: rgb(202, 202, 202);" >
-    <h3 class="text-center mt-2">Quantidade de questões: {{length}}</h3>
+    <div class="d-flex justify-content-between container mt-2">
+      <h3 class="text-center mt-2">Quantidade de questões: {{length}}</h3>
+      <form action="" method="get">
+        <div class="d-flex">
+           <input type="search" class="form-control" placeholder="Id Questção">
+          <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+        </div>
+      </form>
+    </div>
     
     <table class="table container table-bordered mt-2 bg-white rounded">
-    <thead class="thead-dark">
+    <thead class="thead-dark dropdown-head">
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Ensino</th>
-        <th scope="col">Ano</th>
-        <th scope="col">Disciplina</th>
-        <th scope="col">Assunto</th>
+        <th scope="col">
+          <select class="form-select">
+          <option value="Ano">Ano</option>
+           {{#each schoolYear}}
+          <option value="{{this}}">{{this}}</option>
+           {{/each}}
+        </th>
+       
+        <th scope="col">
+          <select class="form-select">
+          <option value="Disciplinas">Disciplinas</option>
+           {{#each disciplines}}
+          <option value="{{this}}">{{this}}</option>
+           {{/each}}
+        </select>
+        </th>
+       
+        <th scope="col">
+          <select class="form-select">
+          <option value="Assunto">Assunto</option>
+          <option value="Geografia">Geografia</option>
+           {{#each subjectsGeografia}}
+          <option value="{{this}}">{{this}}</option>
+           {{/each}}
+           <hr>
+           <option value="Geografia" class="text-center fw-bold">Geografia</option>
+           {{#each subjectsGeografia}}
+          <option value="{{this}}">{{this}}</option>
+           {{/each}}
+        
+        </th>
         <th scope="col">Pergunta</th>
         <th scope="col">Resposta</th>
         <th scope="col">Imagem</th>
@@ -167,7 +202,6 @@
       {{#each question}}
       <tr>
         <th scope="row">{{dataValues.id}}</th>
-        <td class="text-center">{{dataValues.elementarySchool}}</td>
         <td class="text-center">{{dataValues.schoolYear}}</td>
         <td class="text-center">{{dataValues.displice}}</td>
         <td class="text-center">{{dataValues.subject}}</td>
