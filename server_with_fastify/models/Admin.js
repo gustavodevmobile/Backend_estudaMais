@@ -17,5 +17,5 @@ const Admin = sequelize.define("admin", {
     allowNull: false,
   },
 });
-
+//Admin.sync({force:true});
 export default Admin;

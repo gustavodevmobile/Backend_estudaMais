@@ -39,10 +39,10 @@ const getSubjectsByDisciplines = (result, discipline) => {
       listResult.push(result[i].dataValues.subject);
     }
   }
-  console.log(listResult);
+  //console.log(listResult);
   var listSet = new Set(listResult);
   var list = Array.from(listSet);
-  console.log("assunto:", list);
+  //console.log("assunto:", list);
   return list;
 };
 
@@ -60,6 +60,22 @@ export const home = async (req, reply) => {
         result,
         'Geografia'
       );
+      var subjectOfPortugues = getSubjectsByDisciplines(
+        result,
+        'Português'
+      );
+      var subjectOfMatematica = getSubjectsByDisciplines(
+        result,
+        'Matemática'
+      );
+      var subjectOfHistoria = getSubjectsByDisciplines(
+        result,
+        'História'
+      );
+      var subjectOfCiencias = getSubjectsByDisciplines(
+        result,
+        'Ciências'
+      );
 
       return reply.render("home", {
         question: result,
@@ -67,6 +83,12 @@ export const home = async (req, reply) => {
         disciplines: disciplines,
         schoolYear: schoolYear,
         subjectsGeografia: subjectOfGeografia,
+        subjectsPortugues: subjectOfPortugues,
+        subjectsMatematica: subjectOfMatematica,
+        subjectsHistoria: subjectOfHistoria,
+        subjectsCiencias: subjectOfCiencias,
+
+
       });
     });
   } catch (err) {

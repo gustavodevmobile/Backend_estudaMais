@@ -146,7 +146,7 @@
   
   <body style="background-color: rgb(202, 202, 202);" >
     <div class="d-flex justify-content-between container mt-2">
-      <h3 class="text-center mt-2">Quantidade de questões: {{length}}</h3>
+      <h3 class="mt-2 ">Quantidade de questões: {{length}}</h3>
       <form action="" method="get">
         <div class="d-flex">
            <input type="search" class="form-control" placeholder="Id Questção">
@@ -178,16 +178,34 @@
        
         <th scope="col">
           <select class="form-select">
-          <option value="Assunto">Assunto</option>
-          <option value="Geografia">Geografia</option>
+          <option class="text-center" style="font-weight: bold;">Assuntos</option>
+          <hr>
+          <option value="Geografia" class="text-center">Geografia</option>
            {{#each subjectsGeografia}}
           <option value="{{this}}">{{this}}</option>
            {{/each}}
            <hr>
-           <option value="Geografia" class="text-center fw-bold">Geografia</option>
-           {{#each subjectsGeografia}}
+           <option value="Português" class="text-center">Português</option>
+           {{#each subjectsPortugues}}
           <option value="{{this}}">{{this}}</option>
            {{/each}}
+            <hr>
+            <option value="Matematica" class="text-center fw-bold">Matematica</option>
+            {{#each subjectsMatematica}}
+          <option value="{{this}}">{{this}}</option>
+           {{/each}}
+            <hr>
+            <option value="Historia" class="text-center fw-bold">Historia</option>
+            {{#each subjectsHistoria}}
+          <option value="{{this}}">{{this}}</option>
+            {{/each}}
+              <hr>
+              <option value="Ciencias" class="text-center fw-bold">Ciencias</option>
+              {{#each subjectsCiencias}}
+          <option value="{{this}}">{{this}}</option>
+              {{/each}}
+              <hr>
+
         
         </th>
         <th scope="col">Pergunta</th>

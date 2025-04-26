@@ -23,6 +23,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+import sequelize from "./database/database.js";
 
 const fastify = Fastify({
   logger: false,
@@ -63,6 +64,7 @@ fastify.register(route_feedback);
 fastify.register(route_report_resum);
 fastify.register(route_admin);
 fastify.register(logoutRoute);
+//fastify.register(routes_);
 
 fastify.get("/disciplinas", async (req, reply) => {
   var listDisciplines = [];
@@ -123,6 +125,15 @@ fastify.get("/questao/:idQuestion", async (req, reply) => {
     return reply.send(err);
   }
 });
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Conexão com o banco de dados estabelecida com sucesso!");
+  } catch (error) {
+    console.error("Erro ao conectar ao banco de dados:", error);
+  }
+})();
 
 fastify.listen(
   {
