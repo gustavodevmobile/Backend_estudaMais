@@ -8,61 +8,102 @@
 </head>
 <header>
     <nav class="navbar" style="background-color: rgb(53, 74, 136);">
-    <div class="container-fluid">
-    <div class="d-flex">
-  
+    <div class="container-fluid d-flex">
+
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle m-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           1º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount1ano}}
+          </span>
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/matematica/1ano">Matemática</a>
-          <a class="dropdown-item" href="/portugues/1ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/1ano">Ciências da Natureza</a>
-          <a class="dropdown-item" href="/historia/1ano">História</a>
-          <a class="dropdown-item" href="/geografia/1ano">Geografia</a>
-          <a class="dropdown-item" href="/artes/1ano">Artes</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/matematica/1ano">Matemática <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines1M}}
+          </span>
+
+          </a>
+          <a class="dropdown-item" href="/portugues/1ano">Português <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines1P}}</span>
+          </a>
+
+          <a class="dropdown-item" href="/ciencias/1ano">Ciências <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines1C}}
+          </span></a>
+          <a class="dropdown-item" href="/historia/1ano">História <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines1H}}
+          </span></a>
+          <a class="dropdown-item" href="/geografia/1ano">Geografia <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines1G}}
+          </span></a>
         </div>
       </div>
   
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           2º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount2ano}}
+          </span>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-           <a class="dropdown-item" href="/matematica/2ano">Matemática</a>
-          <a class="dropdown-item" href="/portugues/2ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/2ano">Ciências da Natureza</a>
-          <a class="dropdown-item" href="/historia/2ano">História</a>
-          <a class="dropdown-item" href="/geografia/2ano">Geografia</a>
-          <a class="dropdown-item" href="/artes/2ano">Artes</a>
+           <a class="dropdown-item" href="/matematica/2ano">Matemática <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines2M}}
+          </span></a>
+          <a class="dropdown-item" href="/portugues/2ano">Português <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines2P}}
+          </span></a>
+          <a class="dropdown-item" href="/ciencias/2ano">Ciências <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines2C}}
+          </span></a>
+          <a class="dropdown-item" href="/historia/2ano">História <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines2H}}
+          </span></a>
+          <a class="dropdown-item" href="/geografia/2ano">Geografia <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines2G}}
+          </span></a>
         </div>
       </div>
   
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           3º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount3ano}}
+          </span>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-           <a class="dropdown-item" href="/matematica/3ano">Matemática</a>
-          <a class="dropdown-item" href="/portugues/3ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/3ano">Ciências da Natureza</a>
-          <a class="dropdown-item" href="/historia/3ano">História</a>
-          <a class="dropdown-item" href="/geografia/3ano">Geografia</a>
-          <a class="dropdown-item" href="/artes/3ano">Artes</a>
+           <a class="dropdown-item" href="/matematica/3ano">Matemática <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines3M}}
+          </span></a>
+          <a class="dropdown-item" href="/portugues/3ano">Português <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines3P}}
+          </span></a>
+          <a class="dropdown-item" href="/ciencias/3ano">Ciências <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines3C}}
+          </span></a>
+          <a class="dropdown-item" href="/historia/3ano">História <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines3H}}
+          </span></a>
+          <a class="dropdown-item" href="/geografia/3ano">Geografia <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white m-1">
+            {{amountDisciplines3G}}
+          </span></a>
         </div>
       </div>
   
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           4º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount4ano}}
+          </span>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-           <a class="dropdown-item" href="/matematica/4ano">Matemática</a>
-          <a class="dropdown-item" href="/portugues/4ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/4ano">Ciências da Natureza</a>
-          <a class="dropdown-item" href="/historia/4ano">História</a>
-          <a class="dropdown-item" href="/geografia/4ano">Geografia</a>
+           <a class="dropdown-item" href="/matematica/4ano">Matemática {{amountDisciplines4M}}</a>
+          <a class="dropdown-item" href="/portugues/4ano">Português {{amountDisciplines4P}}</a>
+          <a class="dropdown-item" href="/ciencias/4ano">Ciências {{amountDisciplines4C}}</a>
+          <a class="dropdown-item" href="/historia/4ano">História {{amountDisciplines4H}}</a>
+          <a class="dropdown-item" href="/geografia/4ano">Geografia {{amountDisciplines4G}}</a>
           <a class="dropdown-item" href="/artes/4ano">Artes</a>
         </div>
       </div>
@@ -70,11 +111,14 @@
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           5º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount5ano}}
+          </span>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
            <a class="dropdown-item" href="/matematica/5ano">Matemática</a>
           <a class="dropdown-item" href="/portugues/5ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/5ano">Ciências da Natureza</a>
+          <a class="dropdown-item" href="/ciencias/5ano">Ciências</a>
           <a class="dropdown-item" href="/historia/5ano">História</a>
           <a class="dropdown-item" href="/geografia/5ano">Geografia</a>
           <a class="dropdown-item" href="/artes/5ano">Artes</a>
@@ -84,11 +128,14 @@
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           6º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount6ano}}
+          </span>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
            <a class="dropdown-item" href="/matematica/6ano">Matemática</a>
           <a class="dropdown-item" href="/portugues/6ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/6ano">Ciências da Natureza</a>
+          <a class="dropdown-item" href="/ciencias/6ano">Ciências</a>
           <a class="dropdown-item" href="/historia/6ano">História</a>
           <a class="dropdown-item" href="/geografia/6ano">Geografia</a>
           <a class="dropdown-item" href="/artes/6ano">Artes</a>
@@ -98,11 +145,13 @@
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           7º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount7ano}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/matematica/7ano">Matemática</a>
           <a class="dropdown-item" href="/portugues/7ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/7ano">Ciências da Natureza</a>
+          <a class="dropdown-item" href="/ciencias/7ano">Ciências</a>
           <a class="dropdown-item" href="/historia/7ano">História</a>
           <a class="dropdown-item" href="/geografia/7ano">Geografia</a>
           <a class="dropdown-item" href="/artes/7ano">Artes</a>
@@ -112,11 +161,13 @@
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           8º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount8ano}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/matematica/8ano">Matemática</a>
           <a class="dropdown-item" href="/portugues/8ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/8ano">Ciências da Natureza</a>
+          <a class="dropdown-item" href="/ciencias/8ano">Ciências</a>
           <a class="dropdown-item" href="/historia/8ano">História</a>
           <a class="dropdown-item" href="/geografia/8ano">Geografia</a>
           <a class="dropdown-item" href="/artes/8ano">Artes</a>
@@ -125,16 +176,18 @@
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           9º Ano
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{amount9ano}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/matematica/9ano">Matemática</a>
           <a class="dropdown-item" href="/portugues/9ano">Português</a>
-          <a class="dropdown-item" href="/ciencias/9ano">Ciências da Natureza</a>
+          <a class="dropdown-item" href="/ciencias/9ano">Ciências</a>
           <a class="dropdown-item" href="/historia/9ano">História</a>
           <a class="dropdown-item" href="/geografia/9ano">Geografia</a>
           <a class="dropdown-item" href="/artes/9ano">Artes</a>
         </div>
-      </div>
+      
     </div> 
     <a href="/" class="text-white">Home</a>
     <button class="btn bg-primary"><a href="/registrar" class="text-white"> Registrar questão</a></button>
@@ -180,27 +233,29 @@
           <select class="form-select">
           <option class="text-center" style="font-weight: bold;">Assuntos</option>
           <hr>
-          <option value="Geografia" class="text-center">Geografia</option>
+         <form action="/questoes/" method="get">
+           <option value="Geografia" class="text-center">Geografia - {{amountGeografia}}</option>
            {{#each subjectsGeografia}}
           <option value="{{this}}">{{this}}</option>
            {{/each}}
            <hr>
-           <option value="Português" class="text-center">Português</option>
+         </form>
+           <option value="Português" class="text-center">Português - {{amountPortugues}}</option>
            {{#each subjectsPortugues}}
           <option value="{{this}}">{{this}}</option>
            {{/each}}
             <hr>
-            <option value="Matematica" class="text-center fw-bold">Matematica</option>
+            <option value="Matematica" class="text-center fw-bold">Matematica - {{amountMatematica}}</option>
             {{#each subjectsMatematica}}
           <option value="{{this}}">{{this}}</option>
            {{/each}}
             <hr>
-            <option value="Historia" class="text-center fw-bold">Historia</option>
+            <option value="Historia" class="text-center fw-bold">Historia - {{amountHistoria}}</option>
             {{#each subjectsHistoria}}
           <option value="{{this}}">{{this}}</option>
             {{/each}}
               <hr>
-              <option value="Ciencias" class="text-center fw-bold">Ciencias</option>
+              <option value="Ciencias" class="text-center fw-bold">Ciencias - {{amountCiencias}}</option>
               {{#each subjectsCiencias}}
           <option value="{{this}}">{{this}}</option>
               {{/each}}
