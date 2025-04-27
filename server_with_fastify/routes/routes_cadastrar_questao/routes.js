@@ -9,6 +9,7 @@ import {
 
 async function routes_cadastrar(fastify, options) {
   fastify.get("/registrar", {preHandler: verifyToken} ,screen_cadastrar_questao);
+  
   fastify.post(
     "/cadastrar",
     { preHandler: upload.single("image"), verifyToken },

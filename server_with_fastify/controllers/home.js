@@ -1,10 +1,6 @@
-import fs from "fs";
 import "dotenv/config";
 import Database from "../models/Questions.js";
-import {
-  processData
-} from "../utils/helpers.js";
-
+import { processData } from "../utils/helpers.js";
 
 export const home = async (req, reply) => {
   try {
@@ -82,8 +78,40 @@ export const home = async (req, reply) => {
         amountDisciplines7P: datas.amountDisciplines7P,
         amountDisciplines8P: datas.amountDisciplines8P,
         amountDisciplines9P: datas.amountDisciplines9P,
-
       });
+    });
+  } catch (err) {
+    console.log(err);
+    return reply.send(err);
+  }
+};
+
+export const fetchById = async (req, reply) => {
+  const { id } = req.query
+  try {
+    const result = await Database.findOne({
+      where: { id },
+    });
+    
+    console.log(result);
+    if (!result) {
+      return reply.render("home", {
+        question: null,
+        message: "Nenhuma questão encontrada com esse ID",
+      });
+    }else{
+      const imageBuffer = result.dataValues.image;
+      const imageSize = Buffer.byteLength(imageBuffer);
+      const imageSizeKB = (imageSize / 1024).toFixed(2); // Convert to KB
+      const imageSizeMB = (imageSizeKB / 1024).toFixed(2); // Convert to MB
+      console.log("Image size in Megabytes:", imageSizeMB);
+
+      console.log("Image size in KB:", imageSizeKB);
+      result.dataValues.image = result.dataValues.image.toString("base64");
+    }
+    return reply.render("home", {
+      question: [result],
+      length: 1,
     });
   } catch (err) {
     console.log(err);
