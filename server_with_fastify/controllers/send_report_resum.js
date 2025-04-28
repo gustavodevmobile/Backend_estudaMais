@@ -18,7 +18,7 @@ export const sendToEmail = async (req, reply) => {
     reply.send("Email não informado");
   }
 
-  console.log(userName, birthDate, schoolYear);
+  //console.log(userName, birthDate, schoolYear);
 
   try {
     const reportGenerator = new ReportGenerator(

@@ -1,6 +1,9 @@
-// filepath: c:\Users\Gamer\Documents\Projetos\Backend_Flutter\Backend_estudaMais\server_with_fastify\utils\ReportGenerator.js
 import nodemailer from "nodemailer";
-import pdf from "pdfkit";
+//import pdf from "pdfkit";
+import pdfMake from "pdfmake/build/pdfmake.js";
+import vfs from "pdfmake/build/vfs_fonts.js";
+
+pdfMake.vfs = vfs; 
 
 export class ReportGenerator {
   constructor(userName, birthDate, schoolYear, amountAnswered ,email, reportDataCorrects, amountCorrects, reportDataIncorrects, amountIncorrects) {
@@ -17,71 +20,98 @@ export class ReportGenerator {
   }
 
   async generatePDF() {
-    const doc = new pdf();
+    const docDefinition = {
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: "center",
+        },
+        subheader: {
+          fontSize: 14,
+          margin: [0, 5, 0, 5],
+        },
+        tableHeader: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 10, 0, 10],
+          alignment: "center"
+        },
+        bodyHeader: {
+          fontSize: 12,
+          bold: true,
+          alignment: "center",
+        },
+      },
+      content: [
+        { text: "Resumo de Desempenho", style: "header" },
+        { text: `Usuário: ${this.userName}`, style: "subheader" },
+        { text: `Data de Nascimento: ${this.birthDate}`, style: "subheader" },
+        { text: `Ano Escolar: ${this.schoolYear}`, style: "subheader" },
+        { text: `Total de Respondidas: ${this.amountAnswered}`, style: "subheader" },
+        { text: `Quantidade de Corretas: ${this.amountCorrects}`, style: "subheader" },
+        { text: `Quantidade de Incorretas: ${this.amountIncorrects}`, style: "subheader" },
+        { text: "\n" },
 
-    doc.on("data", (chunk) => this.pdfBuffer.push(chunk));
-    doc.on("end", () => console.log("PDF gerado com sucesso!"));
+        { text: "Questões Respondidas Corretamente", style: "tableHeader" },
+        {
+          table: {
+            headerRows: 1,
+            widths: ["*", "*", "*", "*", "*"],
+            body: [
+              [
+                { text: "Ano Escolar", style: "bodyHeader" },
+                { text: "Disciplina", style: "bodyHeader" },
+                { text: "Assunto", style: "bodyHeader" },
+                { text: "Data", style: "bodyHeader" },
+                { text: "Hora", style: "bodyHeader" },
+              ], // Cabeçalhos, 
+              ...this.reportDataCorrects.map((item) => [
+                item.schoolYear,
+                item.discipline,
+                item.subject,
+                item.date,
+                item.hours,
+              ]),
+            ],
+          },
+        },
+        { text: "\n" },
+        { text: "Questões Respondidas Incorretamente", style: "tableHeader" },
+        {
+          table: {
+            headerRows: 1,
+            widths: ["*", "*", "*", "*", "*"],
+            body: [
+              [
+                { text: "Ano Escolar", style: "bodyHeader" },
+                { text: "Disciplina", style: "bodyHeader" },
+                { text: "Assunto", style: "bodyHeader" },
+                { text: "Data", style: "bodyHeader" },
+                { text: "Hora", style: "bodyHeader" },
+              ], // Cabe
+              ...this.reportDataIncorrects.map((item) => [
+                item.schoolYear,
+                item.discipline,
+                item.subject,
+                item.date,
+                item.hours,
+              ]),
+            ],
+          },
+        },
+      ],
+      
+    };
 
-    doc.fontSize(25).fillColor("blue").text("Resumo de Desempenho", { align: "center" });
-
-    doc.fillColor("black").moveDown();
-    
-    doc.fontSize(20).text(`Usuário: ${this.userName}`);
-
-    doc.fontSize(18).text(`Data de Nascimento: ${this.birthDate}`);
-    
-    doc.fontSize(18).text(`Ano Escolar: ${this.schoolYear}`);
-
-    doc.fontSize(20).text(`Total de respondidas: ${this.amountAnswered}`);
-    doc.fontSize(16).text(`Quantidade de Corretas: ${this.amountCorrects}`);
-    doc.fontSize(16).text(`Quantidade de Incorretas: ${this.amountIncorrects}`);
-    doc.moveDown();
-
-    doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
-    doc.moveDown();
-
-    doc.fontSize(20).fillColor("blue").text("Questões respondidas corretamente", { align: "center" });
-    doc.fillColor("black").moveDown();
-
-    if (Array.isArray(this.reportDataCorrects)) {
-      this.reportDataCorrects.forEach((item) => {
-        doc.text(`Ano Escolar: ${item.schoolYear}`);
-        doc.text(`Disciplina: ${item.discipline}`);
-        doc.text(`Assunto: ${item.subject}`);
-        doc.text(`Data: ${item.date}`);
-        doc.text(`Hora: ${item.hours}`);
-        doc.moveDown();
+    return new Promise((resolve, reject) => {
+      const pdfDoc = pdfMake.createPdf(docDefinition);
+      pdfDoc.getBuffer((buffer) => {
+        resolve(buffer);
       });
-    } else {
-      doc.text("Nenhum dado disponível para corretas.");
-      doc.moveDown();
-    }
-
-    doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
-    doc.moveDown();
-
-    doc.fontSize(20).fillColor("blue").text("Questões respondidas incorretamente", { align: "center" });
-    doc.fillColor("black").moveDown();
-
-    if (Array.isArray(this.reportDataIncorrects)) {
-      this.reportDataIncorrects.forEach((item) => {
-        doc.text(`Ano Escolar: ${item.schoolYear}`);
-        doc.text(`Disciplina: ${item.discipline}`);
-        doc.text(`Assunto: ${item.subject}`);
-        doc.text(`Data: ${item.date}`);
-        doc.text(`Hora: ${item.hours}`);
-        doc.moveDown();
-      });
-    } else {
-      doc.text("Nenhum dado disponível para incorretas.");
-      doc.moveDown();
-    }
-
-    doc.end();
-    return new Promise((resolve) => {
-      doc.on("end", () => resolve(Buffer.concat(this.pdfBuffer)));
     });
   }
+    
 
   async sendEmail(pdfData) {
     const transporter = nodemailer.createTransport({

@@ -24,7 +24,7 @@
     "handlebars": "^4.7.8",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.10.0",
-    "pdfkit": "^0.16.0",
+    "pdfmake": "^0.2.19",
     "pg": "^8.14.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.5"
