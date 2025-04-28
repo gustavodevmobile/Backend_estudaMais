@@ -22,7 +22,7 @@ export class ReportGenerator {
     doc.on("data", (chunk) => this.pdfBuffer.push(chunk));
     doc.on("end", () => console.log("PDF gerado com sucesso!"));
 
-    doc.fontSize(25).fillColor("blue").text("Relatório de Desempenho", { align: "center" });
+    doc.fontSize(25).fillColor("blue").text("Resumo de Desempenho", { align: "center" });
 
     doc.fillColor("black").moveDown();
     
@@ -33,6 +33,8 @@ export class ReportGenerator {
     doc.fontSize(18).text(`Ano Escolar: ${this.schoolYear}`);
 
     doc.fontSize(20).text(`Total de respondidas: ${this.amountAnswered}`);
+    doc.fontSize(16).text(`Quantidade de Corretas: ${this.amountCorrects}`);
+    doc.fontSize(16).text(`Quantidade de Incorretas: ${this.amountIncorrects}`);
     doc.moveDown();
 
     doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
@@ -40,8 +42,6 @@ export class ReportGenerator {
 
     doc.fontSize(20).fillColor("blue").text("Questões respondidas corretamente", { align: "center" });
     doc.fillColor("black").moveDown();
-    doc.fontSize(16).text(`Quantidade de Corretas: ${this.amountCorrects}`);
-    doc.moveDown();
 
     if (Array.isArray(this.reportDataCorrects)) {
       this.reportDataCorrects.forEach((item) => {
@@ -62,8 +62,6 @@ export class ReportGenerator {
 
     doc.fontSize(20).fillColor("blue").text("Questões respondidas incorretamente", { align: "center" });
     doc.fillColor("black").moveDown();
-    doc.fontSize(16).text(`Quantidade de Incorretas: ${this.amountIncorrects}`);
-    doc.moveDown();
 
     if (Array.isArray(this.reportDataIncorrects)) {
       this.reportDataIncorrects.forEach((item) => {

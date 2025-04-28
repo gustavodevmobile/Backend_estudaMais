@@ -18,7 +18,7 @@ export const sendToEmail = async (req, reply) => {
     reply.send("Email não informado");
   }
 
-  console.log(userName, birthDate,schoolYear)
+  console.log(userName, birthDate, schoolYear);
 
   try {
     const reportGenerator = new ReportGenerator(
@@ -35,7 +35,14 @@ export const sendToEmail = async (req, reply) => {
     const pdfData = await reportGenerator.generatePDF();
     await reportGenerator.sendEmail(pdfData);
 
-    reply.code(200).send("Relatório enviado com sucesso!");
+    reply.header("Content-Type", "application/pdf");
+    reply
+      .header(
+        "Content-Disposition",
+        `attachment; filename='${userName}_relatorio.pdf'`
+      )
+      .code(200)
+      .send(pdfData);
   } catch (error) {
     console.log(error);
     reply.code(500).send("Erro ao enviar relatório: " + error.message);
