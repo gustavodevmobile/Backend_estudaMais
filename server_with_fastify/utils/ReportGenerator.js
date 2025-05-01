@@ -45,12 +45,15 @@ export class ReportGenerator {
       },
       content: [
         { text: "Resumo de Desempenho", style: "header" },
+        { text: "\n" },
+        { text: `Enviado para: ${this.email}`, style: "subheader" },
         { text: `Usuário: ${this.userName}`, style: "subheader" },
         { text: `Data de Nascimento: ${this.birthDate}`, style: "subheader" },
         { text: `Ano Escolar: ${this.schoolYear}`, style: "subheader" },
         { text: `Total de Respondidas: ${this.amountAnswered}`, style: "subheader" },
         { text: `Quantidade de Corretas: ${this.amountCorrects}`, style: "subheader" },
         { text: `Quantidade de Incorretas: ${this.amountIncorrects}`, style: "subheader" },
+        { text: `Destinatrio: ${this.email}`, style: "subheader" },
         { text: "\n" },
 
         { text: "Questões Respondidas Corretamente", style: "tableHeader" },
