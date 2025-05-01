@@ -19,8 +19,13 @@ export class ReportGenerator {
     this.pdfBuffer = [];
   }
 
+  
+
   async generatePDF() {
-    const base64Image = convertImageToBase64("/image_logo/image_logo_app.png"); // Converte a imagem para base64
+    const filePath = "./image_logo/image_logo_app.png"; // Caminho do arquivo da imagem
+    const imageBuffer = readFileSync(filePath); // Lê o arquivo como buffer
+    const base64Image = `data:image/jpeg;base64,${imageBuffer.toString("base64")}`; // Converte para Base64
+    
     const docDefinition = {
       header: {
         rows: [
