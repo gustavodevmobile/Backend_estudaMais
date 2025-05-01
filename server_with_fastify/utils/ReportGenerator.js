@@ -29,7 +29,7 @@ export class ReportGenerator {
     
     const docDefinition = {
       header: {
-        rows: [
+        columns: [
           {
             image: base64Image, // Adiciona a imagem
             width: 50, // Define a largura da imagem
