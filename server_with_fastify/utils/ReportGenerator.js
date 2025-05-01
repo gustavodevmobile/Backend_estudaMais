@@ -20,7 +20,32 @@ export class ReportGenerator {
   }
 
   async generatePDF() {
+    const base64Image = convertImageToBase64("/image_logo/image_logo_app.png"); // Converte a imagem para base64
     const docDefinition = {
+      header: {
+        rows: [
+          {
+            image: base64Image, // Adiciona a imagem
+            width: 50, // Define a largura da imagem
+            height: 50, // Define a altura da imagem
+            margin: [10, 10, 0, 0], // Margens (esquerda, topo, direita, baixo)
+          },
+          {
+            text: "Relatório de Desempenho", // Título do cabeçalho
+            style: "header",
+            alignment: "center",
+            margin: [0, 20, 0, 0], // Margens para alinhar verticalmente
+          },
+        ],
+      },
+      footer: (currentPage, pageCount) => {
+        return {
+          text: `Página ${currentPage} de ${pageCount}`,
+          style: "footer",
+          alignment: "right",
+          margin: [0, 0, 20, 0],
+        };
+      },
       styles: {
         header: {
           fontSize: 18,
