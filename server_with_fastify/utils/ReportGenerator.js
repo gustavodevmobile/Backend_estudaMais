@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 //import pdf from "pdfkit";
 import pdfMake from "pdfmake/build/pdfmake.js";
 import vfs from "pdfmake/build/vfs_fonts.js";
+import { readFileSync } from "fs";
 
 pdfMake.vfs = vfs; 
 
