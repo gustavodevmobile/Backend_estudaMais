@@ -53,7 +53,6 @@ export class ReportGenerator {
         { text: `Total de Respondidas: ${this.amountAnswered}`, style: "subheader" },
         { text: `Quantidade de Corretas: ${this.amountCorrects}`, style: "subheader" },
         { text: `Quantidade de Incorretas: ${this.amountIncorrects}`, style: "subheader" },
-        { text: `Destinatrio: ${this.email}`, style: "subheader" },
         { text: "\n" },
 
         { text: "Questões Respondidas Corretamente", style: "tableHeader" },
