@@ -76,7 +76,7 @@ fastify.get("/disciplinas", async (req, reply) => {
     }
     var listSet = new Set(listResult);
     var listDisciplines = Array.from(listSet);
-    console.log("listDisciplines", listDisciplines);
+    //console.log("listDisciplines", listDisciplines);
     return reply.send(listDisciplines);
   } catch (err) {
     console.log(err);
