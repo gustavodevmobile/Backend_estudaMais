@@ -42,25 +42,30 @@ export class ReportGenerator {
     )}`; // Converte para Base64
 
     const docDefinition = {
-      pageMargins: [20, 0, 20, 10], // Reduz as margens globais
-      
+      header: function (currentPage, pageCount, pageSize) {
+        return [{ text: "App Lição em Casa", style: "header" }];
+      },
 
       footer: (currentPage, pageCount) => {
         return {
           text: `Página ${currentPage} de ${pageCount}`,
           style: "footer",
           alignment: "right",
-          //margin: [0, 0, 20, 0],
+          margin: [0, 0, 20, 0],
         };
       },
       styles: {
-        header: {
-          fontSize: 18,
-          bold: true,
+        logo: {
           alignment: "center",
         },
+        header: {
+          fontSize: 25,
+          bold: true,
+          alignment: "center",
+          margin: [0, 5, 0, 5],
+        },
         subheader: {
-          fontSize: 14,
+          fontSize: 18,
           margin: [0, 5, 0, 5],
         },
         tableHeader: {
@@ -75,13 +80,14 @@ export class ReportGenerator {
           alignment: "center",
         },
       },
+
       content: [
         {
           image: base64Image, // Adiciona a imagem
-          style: "header",
+          style: "logo",
           width: 100, // Define a largura da imagem
           height: 100, // Define a altura da imagem
-          margin: [0, 10, 0, 0], // Margens (esquerda, topo, direita, baixo)
+          margin: [0, 10, 0, 10], // Margens (esquerda, topo, direita, baixo)
         },
         { text: "\n" },
         { text: "Resumo de Desempenho", style: "header" },

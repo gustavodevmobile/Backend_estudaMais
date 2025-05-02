@@ -76,7 +76,6 @@ fastify.get("/disciplinas", async (req, reply) => {
     }
     var listSet = new Set(listResult);
     var listDisciplines = Array.from(listSet);
-    //console.log("listDisciplines", listDisciplines);
     return reply.send(listDisciplines);
   } catch (err) {
     console.log(err);
@@ -87,7 +86,6 @@ fastify.get("/disciplinas", async (req, reply) => {
 fastify.get("/questoes/:disciplines", async (req, reply) => {
   const disciplinesListJson = req.params.disciplines;
   const disciplinesList = JSON.parse(disciplinesListJson);
-  //console.log("disciplinesList", disciplinesList);
   var listResult = [];
   try {
     for (var i in disciplinesList) {
@@ -99,7 +97,6 @@ fastify.get("/questoes/:disciplines", async (req, reply) => {
         for (var i in result) {
           listResult.push(result[i]["dataValues"]);
         }
-        console.log("listResult", listResult);
       });
     }
     return reply.send(listResult);
