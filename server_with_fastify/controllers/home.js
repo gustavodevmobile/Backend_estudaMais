@@ -85,7 +85,7 @@ export const home = async (req, reply) => {
     return reply.send(err);
   }
 };
-
+// Método faz busca por id
 export const fetchById = async (req, reply) => {
   const { id } = req.query
   try {
@@ -93,7 +93,6 @@ export const fetchById = async (req, reply) => {
       where: { id },
     });
     
-    console.log(result);
     if (!result) {
       return reply.render("home", {
         question: null,
