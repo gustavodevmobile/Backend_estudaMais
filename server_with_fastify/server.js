@@ -24,7 +24,7 @@ import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import sequelize from "./database/database.js";
-import { group } from "console";
+import { Op } from "sequelize";
 
 const fastify = Fastify({
   logger: false,
@@ -84,20 +84,25 @@ fastify.get("/disciplinas", async (req, reply) => {
   }
 });
 
+// Rota que recebe disciplinas e retorna os anos escolares correspondentes
 fastify.post("/disciplines/schoolyear", async (req, reply) => {
   const { disciplines } = req.body;
   try {
     const result = await Database.findAll({
       // Seleciona apenas o campo "schoolYear"
-      attributes: ["schoolYear"],
+      attributes: ["id", "schoolYear"],
       where: {
         // Filtra pelas disciplinas fornecidas
+
         displice: disciplines,
       },
       // Garante que os anos escolares não sejam duplicados
-      group: ["schoolYear"],
+      group: ["id", "schoolYear"],
     });
-    const schoolYears = result.map((item) => item.schoolYear);
+    const schoolYears = result.map((item) => ({
+      id: item.id,
+      schoolYear: item.schoolYear,
+    }));
     //console.log(schoolYears);
     return reply.code(200).send(schoolYears);
   } catch (err) {
@@ -106,45 +111,82 @@ fastify.post("/disciplines/schoolyear", async (req, reply) => {
   }
 });
 
+// Rota que recebe disciplinas e anos escolares e retorna um objeto com assuntos relacionados, disciplinas e anos escolares
 fastify.post("/disciplines/schoolyears/subjects", async (req, reply) => {
   const { disciplines, schoolYear } = req.body; // Recebe disciplinas e anos escolares do corpo da requisição
-  console.log("req.body", req.body);
-  console.log(disciplines, schoolYear);
+  //console.log("req.body", req.body);
+  //console.log(disciplines, schoolYear);
   try {
     // Busca os assuntos relacionados às disciplinas e anos escolares
     const results = await Database.findAll({
-      attributes: ["displice", "schoolYear", "subject"], // Seleciona os campos necessários
+      attributes: ["id", "displice", "schoolYear", "subject"], // Seleciona os campos necessários
       where: {
         displice: disciplines, // Filtra pelas disciplinas fornecidas
         schoolYear: schoolYear, // Filtra pelos anos escolares fornecidos
       },
     });
-     // Remove duplicatas dos resultados
-     const uniqueResults = results
-     .map((item) => item.dataValues) // Extrai os valores dos resultados
-     .filter(
-       (value, index, self) =>
-         index ===
-         self.findIndex(
-           (t) =>
-             t.displice === value.displice &&
-             t.schoolYear === value.schoolYear &&
-             t.subject === value.subject
-         )
-     );
+    // Remove duplicatas dos resultados
+    const uniqueResults = results
+      .map((item) => item.dataValues) // Extrai os valores dos resultados
+      .filter(
+        (value, index, self) =>
+          index ===
+          self.findIndex(
+            (t) =>
+              t.id === value.id &&
+              t.displice === value.displice &&
+              t.schoolYear === value.schoolYear &&
+              t.subject === value.subject
+          )
+      );
+    console.log("uniqueResults", uniqueResults);
 
     const response = uniqueResults.map((item) => {
       return {
+        id: item.id,
         discipline: item.displice,
         schoolYear: item.schoolYear,
         subject: item.subject,
       };
     });
-    console.log("response", response);
+    //console.log("response", response);
     return reply.code(200).send(response); // Retorna o objeto estruturado
   } catch (err) {
     console.error(err);
     return reply.code(500).send({ error: "Erro ao buscar dados: ", err });
+  }
+});
+
+fastify.post("/resultadodabusca", async (req, reply) => {
+  const filters = req.body; // Recebe o array de objetos no corpo da requisição
+  console.log("req.body", filters);
+
+  try {
+    // Valida se o corpo da requisição é um array
+    if (!Array.isArray(filters) || filters.length === 0) {
+      return reply
+        .code(400)
+        .send({ error: "O corpo da requisição deve ser um array de objetos." });
+    }
+
+    // Busca as questões relacionadas com base nos filtros fornecidos
+    const results = await Database.findAll({
+      where: {
+        [Op.or]: filters.map((filter) => ({
+          displice: filter.disciplines,
+          schoolYear: filter.schoolYear,
+          subject: filter.subjects,
+        })),
+      },
+    });
+
+    // Retorna as questões encontradas
+    return reply.code(200).send(results);
+  } catch (err) {
+    console.error(err);
+    return reply
+      .code(500)
+      .send({ error: "Erro ao buscar questões relacionadas.", details: err });
   }
 });
 
@@ -177,17 +219,29 @@ fastify.get("/questoes/:disciplines", async (req, reply) => {
 });
 
 fastify.get("/questao/:idQuestion", async (req, reply) => {
-  var listResult = [];
-  var idsJson = req.params.idQuestion;
-  var idsQuestion = JSON.parse(idsJson);
+  const listResult = [];
+  const idsJson = req.params.idQuestion;
+  const idsQuestion = JSON.parse(idsJson);
+  console.log("idsQuestion", idsQuestion);
+
+  const missingIds = [];
 
   try {
-    for (var i in idsQuestion) {
-      await Database.findByPk(idsQuestion[i]).then((result) => {
+    for (var id of idsQuestion) {
+      const result = await Database.findByPk(id);
+      if (result) {
         listResult.push(result);
-      });
+      } else {
+        missingIds.push(id);
+      }
     }
-    return reply.send(listResult);
+    console.log("listResult", listResult);
+    console.log("missingIds", missingIds);
+
+    return reply.send({
+      questions: listResult,
+      missingIds: missingIds,
+    });
   } catch (err) {
     return reply.send(err);
   }
