@@ -25,6 +25,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import sequelize from "./database/database.js";
 import { Op } from "sequelize";
+import { generateExplanation } from "./utils/explanationService.js";
+
+
 
 const fastify = Fastify({
   logger: false,
@@ -66,6 +69,26 @@ fastify.register(route_report_resum);
 fastify.register(route_admin);
 fastify.register(logoutRoute);
 //fastify.register(routes_);
+
+fastify.post("/explain-question", async (req, reply) => {
+  const { question, alternatives, image } = req.body;
+
+  // Valida os dados recebidos
+  if (!question || !alternatives || !Array.isArray(alternatives) || alternatives.length === 0) {
+    return reply.code(400).send({ error: "A pergunta e as alternativas são obrigatórias." });
+  }
+
+  try {
+    // Gera a explicação
+    const explanation = await generateExplanation(question, alternatives, image);
+
+    // Retorna a explicação gerada
+    return reply.code(200).send({ explanation });
+  } catch (err) {
+    console.error(err);
+    return reply.code(500).send({ error: "Erro ao gerar explicação." });
+  }
+});
 
 fastify.get("/disciplinas", async (req, reply) => {
   var listDisciplines = [];
