@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@huggingface/hub": "^2.0.1"
+    "@huggingface/hub": "^2.0.1",
+    "node-fetch": "^3.3.2"
   }
 }
