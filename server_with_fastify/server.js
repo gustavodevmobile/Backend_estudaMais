@@ -81,9 +81,10 @@ fastify.post("/explain-question", async (req, reply) => {
   try {
     // Gera a explicação
     const explanation = await generateExplanation(question, alternatives, image);
-
+    console.log("explanation", explanation);
     // Retorna a explicação gerada
     return reply.code(200).send({ explanation });
+    
   } catch (err) {
     console.error(err);
     return reply.code(500).send({ error: "Erro ao gerar explicação." });
