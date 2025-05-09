@@ -25,7 +25,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import sequelize from "./database/database.js";
 import { Op } from "sequelize";
-import { generateExplanation } from "./utils/explanationService.js";
+import { generateExplanation } from "./utils/explanationQuestions.js";
 
 
 
@@ -182,7 +182,7 @@ fastify.post("/disciplines/schoolyears/subjects", async (req, reply) => {
 
 fastify.post("/resultadodabusca", async (req, reply) => {
   const filters = req.body; // Recebe o array de objetos no corpo da requisição
-  console.log("req.body", filters);
+  //console.log("req.body", filters);
 
   try {
     // Valida se o corpo da requisição é um array
@@ -233,7 +233,7 @@ fastify.get("/questoes/:disciplines", async (req, reply) => {
     // }
 
     const schoolYears = result.map((item) => item.schoolYear);
-    console.log(schoolYears);
+    //console.log(schoolYears);
     return reply.send(listResult);
   } catch (err) {
     console.log(err);
@@ -245,7 +245,7 @@ fastify.get("/questao/:idQuestion", async (req, reply) => {
   const listResult = [];
   const idsJson = req.params.idQuestion;
   const idsQuestion = JSON.parse(idsJson);
-  console.log("idsQuestion", idsQuestion);
+  //console.log("idsQuestion", idsQuestion);
 
   const missingIds = [];
 
@@ -258,8 +258,8 @@ fastify.get("/questao/:idQuestion", async (req, reply) => {
         missingIds.push(id);
       }
     }
-    console.log("listResult", listResult);
-    console.log("missingIds", missingIds);
+    // console.log("listResult", listResult);
+    // console.log("missingIds", missingIds);
 
     return reply.send({
       questions: listResult,
