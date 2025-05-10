@@ -71,17 +71,19 @@ fastify.register(logoutRoute);
 //fastify.register(routes_);
 
 fastify.post("/explain-question", async (req, reply) => {
-  const { question, alternatives, image } = req.body;
+  const { question } = req.body;
+  console.log("question", question);
+  //console.log("alternatives", alternatives);
 
   // Valida os dados recebidos
-  if (!question || !alternatives || !Array.isArray(alternatives) || alternatives.length === 0) {
-    return reply.code(400).send({ error: "A pergunta e as alternativas são obrigatórias." });
-  }
+  // if (!question || !alternatives || !Array.isArray(alternatives) || alternatives.length === 0) {
+  //   return reply.code(400).send({ error: "A pergunta e as alternativas são obrigatórias." });
+  // }
 
   try {
     // Gera a explicação
-    const explanation = await generateExplanation(question, alternatives, image);
-    console.log("explanation", explanation);
+    const explanation = await generateExplanation(question);
+    //console.log("explanation", explanation);
     // Retorna a explicação gerada
     return reply.code(200).send({ explanation });
     
@@ -163,7 +165,7 @@ fastify.post("/disciplines/schoolyears/subjects", async (req, reply) => {
               t.subject === value.subject
           )
       );
-    console.log("uniqueResults", uniqueResults);
+    //console.log("uniqueResults", uniqueResults);
 
     const response = uniqueResults.map((item) => {
       return {

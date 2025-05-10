@@ -103,9 +103,9 @@ export const fetchById = async (req, reply) => {
       const imageSize = Buffer.byteLength(imageBuffer);
       const imageSizeKB = (imageSize / 1024).toFixed(2); // Convert to KB
       const imageSizeMB = (imageSizeKB / 1024).toFixed(2); // Convert to MB
-      console.log("Image size in Megabytes:", imageSizeMB);
+      // console.log("Image size in Megabytes:", imageSizeMB);
 
-      console.log("Image size in KB:", imageSizeKB);
+      // console.log("Image size in KB:", imageSizeKB);
       result.dataValues.image = result.dataValues.image.toString("base64");
     }
     return reply.render("home", {
