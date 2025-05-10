@@ -46,8 +46,8 @@ export async function generateExplanation(
     // }
 
     const response = await client.chatCompletion({
-      provider: "novita",
-      model: "deepseek-ai/DeepSeek-Prover-V2-671B",
+      provider: "together",
+      model: "deepseek-ai/DeepSeek-R1",
       messages: [
         {
           role: "user",
