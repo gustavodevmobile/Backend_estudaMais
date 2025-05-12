@@ -71,18 +71,18 @@ fastify.register(logoutRoute);
 //fastify.register(routes_);
 
 fastify.post("/explain-question", async (req, reply) => {
-  const { question } = req.body;
+  const { question, alternatives, image } = req.body;
   console.log("question", question);
   //console.log("alternatives", alternatives);
 
-  // Valida os dados recebidos
-  // if (!question || !alternatives || !Array.isArray(alternatives) || alternatives.length === 0) {
-  //   return reply.code(400).send({ error: "A pergunta e as alternativas são obrigatórias." });
-  // }
+ //  Valida os dados recebidos
+  if (!question || !alternatives || !Array.isArray(alternatives) || alternatives.length === 0) {
+    return reply.code(400).send({ error: "A pergunta e as alternativas são obrigatórias." });
+  }
 
   try {
     // Gera a explicação
-    const explanation = await generateExplanation(question);
+    let explanation = await generateExplanation(question, alternatives, image);
     //console.log("explanation", explanation);
     // Retorna a explicação gerada
     return reply.code(200).send({ explanation });

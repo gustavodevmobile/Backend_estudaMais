@@ -34,18 +34,18 @@ function formatExplanation(rawExplanation) {
 
 export async function generateExplanation(
   question,
-  // alternatives,
-  // image = null
+  alternatives,
+  image = null
 ) {
   try {
-    let prompt = question;
+    let prompt = `Responda a questão em português, com um breve resumo, e indique qual alternativa correta. questão: ${question}, alternativas: ${alternatives}`;
     console.log("Prompt:", prompt);
 
-    // if (image) {
-    //   prompt = `Com base na imagem fornecida, ${prompt}`;
-    // }
+    if (image) {
+      prompt = `Com base na imagem fornecida ${image}, ${prompt}`;
+    }
 
-    const response = await client.chatCompletion({
+    let response = await client.chatCompletion({
       provider: "together",
       model: "deepseek-ai/DeepSeek-R1",
       messages: [
@@ -54,6 +54,10 @@ export async function generateExplanation(
           content: prompt,
         },
       ],
+      parameters: {
+        temperature: 0.7,
+        max_new_tokens: 200,
+      },
     });
 
     // if (!response || !response.choices || !response.choices[0]) {
@@ -63,11 +67,10 @@ export async function generateExplanation(
 
     // // Formatar a explicação como objeto estruturado
     // const formattedExplanation = formatExplanation(rawExplanation);
-    console.log("Explicação formatada:",response.choices[0].message.content);
+    console.log("Explicação formatada:", response.choices[0].message.content);
     return response.choices[0].message.content;
   } catch (error) {
     console.error("Erro ao gerar explicação:", error);
     throw new Error("Não foi possível gerar a explicação.");
   }
 }
-
