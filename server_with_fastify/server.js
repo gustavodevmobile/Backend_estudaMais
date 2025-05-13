@@ -216,40 +216,39 @@ fastify.post("/resultadodabusca", async (req, reply) => {
   }
 });
 
-fastify.get("/questoes/:disciplines", async (req, reply) => {
-  const disciplinesListJson = req.params.disciplines;
-  const disciplinesList = JSON.parse(disciplinesListJson);
-  //console.log(disciplinesList);
-  var listResult = [];
-  try {
-    //for (var i in disciplinesList) {
-    const result = await Database.findAll({
-      // Seleciona apenas o campo "schoolYear"
-      attributes: ["schoolYear"],
-      where: {
-        // Filtra pelas disciplinas fornecidas
-        displice: disciplinesList,
-      },
-      // Garante que os anos escolares não sejam duplicados
-      group: ["schoolYear"],
-    });
-    // }
+// fastify.get("/questoes/:disciplines", async (req, reply) => {
+//   const disciplinesListJson = req.params.disciplines;
+//   const disciplinesList = JSON.parse(disciplinesListJson);
+//   //console.log(disciplinesList);
+//   var listResult = [];
+//   try {
+//     //for (var i in disciplinesList) {
+//     const result = await Database.findAll({
+//       // Seleciona apenas o campo "schoolYear"
+//       attributes: ["schoolYear"],
+//       where: {
+//         // Filtra pelas disciplinas fornecidas
+//         displice: disciplinesList,
+//       },
+//       // Garante que os anos escolares não sejam duplicados
+//       group: ["schoolYear"],
+//     });
+//     // }
 
-    const schoolYears = result.map((item) => item.schoolYear);
-    //console.log(schoolYears);
-    return reply.send(listResult);
-  } catch (err) {
-    console.log(err);
-    return reply.send(err);
-  }
-});
+//     const schoolYears = result.map((item) => item.schoolYear);
+//     //console.log(schoolYears);
+//     return reply.send(listResult);
+//   } catch (err) {
+//     console.log(err);
+//     return reply.send(err);
+//   }
+// });
 
 fastify.get("/questao/:idQuestion", async (req, reply) => {
   const listResult = [];
   const idsJson = req.params.idQuestion;
   const idsQuestion = JSON.parse(idsJson);
-  //console.log("idsQuestion", idsQuestion);
-
+  
   const missingIds = [];
 
   try {
@@ -261,8 +260,6 @@ fastify.get("/questao/:idQuestion", async (req, reply) => {
         missingIds.push(id);
       }
     }
-    // console.log("listResult", listResult);
-    // console.log("missingIds", missingIds);
 
     return reply.send({
       questions: listResult,

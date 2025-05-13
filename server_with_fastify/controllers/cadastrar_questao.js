@@ -8,19 +8,18 @@ export const screen_cadastrar_questao = async (req, reply) => {
 
 export const cadastrar_questao = async function (req, reply) {
   let image;
-
   try {
-    console.log('req.file.filename', req.file.filename);
+    // Recebe o arquivo enviado
     const file = req.file;
+    // Verifica se o arquivo foi enviado
     if (!req.file.filename) {
-      //console.log("Nenhum arquivo enviado.");
+      // Se não houver arquivo, defina uma imagem padrão
       image = "sem imagem";
     } else {
-      //console.log("Arquivo recebido:", file);
-      image = readFileSync(file.path); // Lê o arquivo diretamente do stream
-      //console.log("image", image);
+      // Se houver arquivo, leia o arquivo diretamente do stream
+      image = readFileSync(file.path); 
     }
-
+// Salva a imagem no banco de dados
     await Database.create({
       elementarySchool: req.body.elementarySchool,
       schoolYear: req.body.schoolYear,
@@ -34,13 +33,12 @@ export const cadastrar_questao = async function (req, reply) {
       alternativeC: req.body.altC,
       alternativeD: req.body.altD,
       explanation: req.body.explanation,
-      
     });
     console.log("Questão com imagem salva com sucesso:");
-    return reply.redirect("/");
+    //return reply.redirect("/");
   } catch (e) {
     console.error(`Erro ao salvar a imagem: ${e}`);
     return reply.code(500).send({ error: `Erro ao salvar iamgem ${e}` });
   }
 };
-// Obtenha o arquivo enviado
+
