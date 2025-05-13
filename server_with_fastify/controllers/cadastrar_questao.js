@@ -18,7 +18,7 @@ export const cadastrar_questao = async function (req, reply) {
     } else {
       //console.log("Arquivo recebido:", file);
       image = readFileSync(file.path); // Lê o arquivo diretamente do stream
-      console.log("image", image);
+      //console.log("image", image);
     }
 
     await Database.create({
@@ -33,6 +33,8 @@ export const cadastrar_questao = async function (req, reply) {
       alternativeB: req.body.altB,
       alternativeC: req.body.altC,
       alternativeD: req.body.altD,
+      explanation: req.body.explanation,
+      
     });
     console.log("Questão com imagem salva com sucesso:");
     return reply.redirect("/");

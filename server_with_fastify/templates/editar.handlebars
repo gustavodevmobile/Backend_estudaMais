@@ -180,18 +180,26 @@
           value="{{answer}}"
           name="answer"
           class="form-control"
-          id="resposta"
-        />
-    </div>
-    
+          id="resposta"/>
+      </div>
     </div>
     <div class="d-flex flex-column w-50">
       <div class="bg-white m-1 text-center">
         <img src="data:image/jpeg;base64,{{image}}" id="imageQuestion" alt=" sem imagem" class="w-50 m-2">
       </div>
-      
+      <div class="form-group m-1">
+        <label for="exampleFormControlTextarea1" class="text-white" >Explicação</label>
+        <input
+          type="text"
+         value="{{explanation}}"
+          name="explanation"
+          class="form-control"
+          id="resposta"
+        />
+      </div>
     </div>
   </div>
+  
 
      <div class="m-2 d-flex">
       <div class="form-group w-50 m-1">
@@ -201,9 +209,8 @@
             value="{{alternativeA}}"
             name="altA"
             class="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
+            id="exampleInputPassword1"/>
+      </div>
         <div class="form-group w-50 m-1">
           <label for="exampleInputPassword1" class="text-white">Alternativa B</label>
           <input

@@ -318,6 +318,7 @@
         </th>
         <th scope="col">Pergunta</th>
         <th scope="col">Resposta</th>
+        <th scope="col">Explicação</th>
         <th scope="col">Imagem</th>
         <th scope="col">Editar</th>
         <th scope="col">Deletar</th>
@@ -332,6 +333,7 @@
         <td class="text-center">{{dataValues.subject}}</td>
         <td class="text-center">{{dataValues.question}}</td>
         <td class="text-center">{{dataValues.answer}}</td>
+        <td class="text-center">{{dataValues.explanation}}</td>
         <td class="text-center p-1"><img src="data:image/jpeg;base64,{{dataValues.image}}" alt=" sem imagem" class="w-75" ></td>
         <td><form action="/editar-questao/{{dataValues.id}}"><a href="/editar-questao/{{dataValues.id}}">Editar</a></form></td>
         <form action="/deletar" method="DELETE"><td><a href="/deletar/{{dataValues.id}}/{{dataValues.nameImageDir}}" class="text-danger">Deletar</a></td></form>

@@ -72,7 +72,7 @@ fastify.register(logoutRoute);
 
 fastify.post("/explain-question", async (req, reply) => {
   const { question, alternatives, image } = req.body;
-  console.log("question", question);
+  //console.log("question", question);
   //console.log("alternatives", alternatives);
 
  //  Valida os dados recebidos
@@ -219,7 +219,7 @@ fastify.post("/resultadodabusca", async (req, reply) => {
 fastify.get("/questoes/:disciplines", async (req, reply) => {
   const disciplinesListJson = req.params.disciplines;
   const disciplinesList = JSON.parse(disciplinesListJson);
-  console.log(disciplinesList);
+  //console.log(disciplinesList);
   var listResult = [];
   try {
     //for (var i in disciplinesList) {

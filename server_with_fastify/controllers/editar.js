@@ -28,6 +28,7 @@ export const editar_questao = async (req, reply) => {
         alternativeB: req.body.altB,
         alternativeC: req.body.altC,
         alternativeD: req.body.altD,
+        explanation: req.body.explanation,
       },
       { where: { id: req.body.id } }
     );
@@ -57,6 +58,7 @@ export const screen_editar_questao = async (req, reply) => {
       alternativeB: result.alternativeB,
       alternativeC: result.alternativeC,
       alternativeD: result.alternativeD,
+      explanation: result.explanation,
     });
   } catch (err) {
     console.log(err);
