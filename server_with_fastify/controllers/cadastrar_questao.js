@@ -35,7 +35,7 @@ export const cadastrar_questao = async function (req, reply) {
       explanation: req.body.explanation,
     });
     console.log("Questão com imagem salva com sucesso:");
-    //return reply.redirect("/");
+    return reply.redirect("registrar");
   } catch (e) {
     console.error(`Erro ao salvar a imagem: ${e}`);
     return reply.code(500).send({ error: `Erro ao salvar iamgem ${e}` });
