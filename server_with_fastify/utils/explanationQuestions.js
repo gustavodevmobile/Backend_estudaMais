@@ -60,13 +60,7 @@ export async function generateExplanation(
       },
     });
 
-    // if (!response || !response.choices || !response.choices[0]) {
-    //   throw new Error("Resposta inválida da API Hugging Face.");
-    // }
-    // const rawExplanation = response.choices[0].message.content;
-
-    // // Formatar a explicação como objeto estruturado
-    // const formattedExplanation = formatExplanation(rawExplanation);
+   
     console.log("Explicação formatada:", response.choices[0].message.content);
     return response.choices[0].message.content;
   } catch (error) {
