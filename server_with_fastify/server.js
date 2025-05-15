@@ -248,8 +248,8 @@ fastify.get("/questao/:idQuestion", async (req, reply) => {
   const listResult = [];
   const idsJson = req.params.idQuestion;
   const idsQuestion = JSON.parse(idsJson);
-  
   const missingIds = [];
+  console.log("idsQuestion", idsQuestion);  
 
   try {
     for (var id of idsQuestion) {
