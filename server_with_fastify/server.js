@@ -260,7 +260,6 @@ fastify.get("/questao/:idQuestion", async (req, reply) => {
         missingIds.push(id);
       }
     }
-
     return reply.send({
       questions: listResult,
       missingIds: missingIds,
