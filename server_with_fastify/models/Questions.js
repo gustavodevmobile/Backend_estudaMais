@@ -13,7 +13,7 @@ const Question = sequelize.define("questions", {
     schoolYear: {
       type: Sequelize.TEXT,
     },
-    displice: {
+    discipline: {
       type: Sequelize.TEXT,
     },
     subject: {
