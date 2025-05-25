@@ -2,7 +2,7 @@
 export const getDisciplines = (result) => {
   var listResult = [];
   for (var i in result) {
-    listResult.push(result[i].dataValues.displice);
+    listResult.push(result[i].dataValues.discipline);
   }
   var listSet = new Set(listResult);
   var list = Array.from(listSet);
@@ -26,7 +26,7 @@ export const getSchoolYear = (result) => {
 export const getSubjectsByDisciplines = (result, discipline) => {
   var listResult = [];
   for (var i in result) {
-    if (result[i].dataValues.displice == discipline) {
+    if (result[i].dataValues.discipline == discipline) {
       listResult.push(result[i].dataValues.subject);
     }
   }
@@ -62,9 +62,9 @@ export const getAmountDisciplinesBySchoolYear = (
   for (var i in result) {
     if (
       result[i].dataValues.schoolYear == schoolYear &&
-      result[i].dataValues.displice == disciplines
+      result[i].dataValues.discipline == disciplines
     ) {
-      listResult.push(result[i].dataValues.displice);
+      listResult.push(result[i].dataValues.discipline);
     }
   }
   var amountDisciplinesBySchoolYear = listResult.length;

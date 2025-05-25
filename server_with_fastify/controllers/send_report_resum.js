@@ -11,14 +11,8 @@ export const sendToEmail = async (req, reply) => {
     amountCorrects,
     reportDataIncorrects,
     amountIncorrects,
-    email,
+    //email,
   } = req.body;
-
-  if (!email) {
-    reply.send("Email não informado");
-  }
-
-  //console.log(userName, birthDate, schoolYear);
 
   try {
     const reportGenerator = new ReportGenerator(
@@ -26,14 +20,13 @@ export const sendToEmail = async (req, reply) => {
       birthDate,
       schoolYear,
       amountAnswered,
-      email,
+      //email,
       reportDataCorrects,
       amountCorrects,
       reportDataIncorrects,
       amountIncorrects
     );
     const pdfData = await reportGenerator.generatePDF();
-    await reportGenerator.sendEmail(pdfData);
 
     reply.header("Content-Type", "application/pdf");
     reply

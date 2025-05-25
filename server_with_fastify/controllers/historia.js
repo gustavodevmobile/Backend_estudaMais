@@ -4,7 +4,7 @@ const renderHistoria = async (req, reply, discipline, schoolYear) => {
   var amountQuestions;
   try {
     await Database.findAll({
-      where: { displice: discipline, schoolYear: schoolYear },
+      where: { discipline: discipline, schoolYear: schoolYear },
     }).then((result) => {
       result.map((element) => {
         const imageBase64 = element["dataValues"]["image"].toString("base64");

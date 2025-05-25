@@ -16,7 +16,7 @@ export class ReportGenerator {
     birthDate,
     schoolYear,
     amountAnswered,
-    email,
+    //email,
     reportDataCorrects,
     amountCorrects,
     reportDataIncorrects,
@@ -26,7 +26,7 @@ export class ReportGenerator {
     this.birthDate = birthDate;
     this.schoolYear = schoolYear;
     this.amountAnswered = amountAnswered;
-    this.email = email;
+    //this.email = email;
     this.reportDataCorrects = reportDataCorrects;
     this.amountCorrects = amountCorrects;
     this.reportDataIncorrects = reportDataIncorrects;
@@ -114,7 +114,7 @@ export class ReportGenerator {
         {
           table: {
             headerRows: 1,
-            widths: ["*", "*", "*", "*", "*"],
+            widths: ["*", "*", "*", "*", "*", "*"],
             body: [
               [
                 { text: "Ano Escolar", style: "bodyHeader" },
@@ -122,6 +122,7 @@ export class ReportGenerator {
                 { text: "Assunto", style: "bodyHeader" },
                 { text: "Data", style: "bodyHeader" },
                 { text: "Hora", style: "bodyHeader" },
+                { text: "Tempo de resposta", style: "bodyHeader" },
               ], // Cabeçalhos,
               ...this.reportDataCorrects.map((item) => [
                 item.schoolYear,
@@ -129,6 +130,7 @@ export class ReportGenerator {
                 item.subject,
                 item.date,
                 item.hours,
+                item.timeResponse,
               ]),
             ],
           },
@@ -138,7 +140,7 @@ export class ReportGenerator {
         {
           table: {
             headerRows: 1,
-            widths: ["*", "*", "*", "*", "*"],
+            widths: ["*", "*", "*", "*", "*", "*"],
             body: [
               [
                 { text: "Ano Escolar", style: "bodyHeader" },
@@ -146,6 +148,7 @@ export class ReportGenerator {
                 { text: "Assunto", style: "bodyHeader" },
                 { text: "Data", style: "bodyHeader" },
                 { text: "Hora", style: "bodyHeader" },
+                { text: "Tempo de resposta", style: "bodyHeader" },
               ], // Cabe
               ...this.reportDataIncorrects.map((item) => [
                 item.schoolYear,
@@ -153,6 +156,7 @@ export class ReportGenerator {
                 item.subject,
                 item.date,
                 item.hours,
+                item.timeResponse,
               ]),
             ],
           },
@@ -168,29 +172,29 @@ export class ReportGenerator {
     });
   }
 
-  async sendEmail(pdfData) {
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+  // async sendEmail(pdfData) {
+  //   const transporter = nodemailer.createTransport({
+  //     service: "Gmail",
+  //     auth: {
+  //       user: process.env.EMAIL_USER,
+  //       pass: process.env.EMAIL_PASS,
+  //     },
+  //   });
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: this.email,
-      subject: "Relatório de resumo de questões",
-      text: "Envio de relatório de desempenho",
-      attachments: [
-        {
-          filename: "relatorio.pdf",
-          content: pdfData,
-        },
-      ],
-    };
+  //   const mailOptions = {
+  //     from: process.env.EMAIL_USER,
+  //     to: this.email,
+  //     subject: "Relatório de resumo de questões",
+  //     text: "Envio de relatório de desempenho",
+  //     attachments: [
+  //       {
+  //         filename: "relatorio.pdf",
+  //         content: pdfData,
+  //       },
+  //     ],
+  //   };
 
-    await transporter.sendMail(mailOptions);
-    console.log("E-mail enviado com sucesso!");
-  }
+  //   await transporter.sendMail(mailOptions);
+  //   console.log("E-mail enviado com sucesso!");
+  // }
 }

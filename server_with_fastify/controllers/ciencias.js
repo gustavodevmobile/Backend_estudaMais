@@ -5,7 +5,7 @@ import Database from "../models/Questions.js"
 const renderCiencias = async (req, reply, discipline, schoolYear) => {
   try {
     await Database.findAll({
-      where: { displice: discipline, schoolYear: schoolYear },
+      where: { discipline: discipline, schoolYear: schoolYear },
     }).then((result) => {
       result.map((element) => {
         const imageBase64 = element["dataValues"]["image"].toString("base64");
