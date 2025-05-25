@@ -97,9 +97,9 @@ fastify.get("/disciplinas", async (req, reply) => {
   var listDisciplines = [];
   var listResult = [];
   try {
-    var result = await Database.findAll({ attributes: ["displice"] });
+    var result = await Database.findAll({ attributes: ["discipline"] });
     for (var i in result) {
-      listResult.push(result[i].dataValues.displice);
+      listResult.push(result[i].dataValues.discipline);
     }
     var listSet = new Set(listResult);
     var listDisciplines = Array.from(listSet);
@@ -120,7 +120,7 @@ fastify.post("/disciplines/schoolyear", async (req, reply) => {
       where: {
         // Filtra pelas disciplinas fornecidas
 
-        displice: disciplines,
+        discipline: disciplines,
       },
       // Garante que os anos escolares não sejam duplicados
       group: ["id", "schoolYear"],
@@ -145,9 +145,9 @@ fastify.post("/disciplines/schoolyears/subjects", async (req, reply) => {
   try {
     // Busca os assuntos relacionados às disciplinas e anos escolares
     const results = await Database.findAll({
-      attributes: ["id", "displice", "schoolYear", "subject"], // Seleciona os campos necessários
+      attributes: ["id", "discipline", "schoolYear", "subject"], // Seleciona os campos necessários
       where: {
-        displice: disciplines, // Filtra pelas disciplinas fornecidas
+        discipline: disciplines, // Filtra pelas disciplinas fornecidas
         schoolYear: schoolYear, // Filtra pelos anos escolares fornecidos
       },
     });
@@ -160,7 +160,7 @@ fastify.post("/disciplines/schoolyears/subjects", async (req, reply) => {
           self.findIndex(
             (t) =>
               t.id === value.id &&
-              t.displice === value.displice &&
+              t.discipline === value.discipline &&
               t.schoolYear === value.schoolYear &&
               t.subject === value.subject
           )
@@ -170,7 +170,7 @@ fastify.post("/disciplines/schoolyears/subjects", async (req, reply) => {
     const response = uniqueResults.map((item) => {
       return {
         id: item.id,
-        discipline: item.displice,
+        discipline: item.discipline,
         schoolYear: item.schoolYear,
         subject: item.subject,
       };
@@ -199,7 +199,7 @@ fastify.post("/resultadodabusca", async (req, reply) => {
     const results = await Database.findAll({
       where: {
         [Op.or]: filters.map((filter) => ({
-          displice: filter.disciplines,
+          discipline: filter.disciplines,
           schoolYear: filter.schoolYear,
           subject: filter.subjects,
         })),
