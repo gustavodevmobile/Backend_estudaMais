@@ -244,30 +244,30 @@ fastify.post("/resultadodabusca", async (req, reply) => {
 //   }
 // });
 
-fastify.get("/questao/:idQuestion", async (req, reply) => {
-  const listResult = [];
-  const idsJson = req.params.idQuestion;
-  const idsQuestion = JSON.parse(idsJson);
-  const missingIds = [];
-  console.log("idsQuestion", idsQuestion);  
+// fastify.get("/questao/:idQuestion", async (req, reply) => {
+//   const listResult = [];
+//   const idsJson = req.params.idQuestion;
+//   const idsQuestion = JSON.parse(idsJson);
+//   const missingIds = [];
+//   console.log("idsQuestion", idsQuestion);  
 
-  try {
-    for (var id of idsQuestion) {
-      const result = await Database.findByPk(id);
-      if (result) {
-        listResult.push(result);
-      } else {
-        missingIds.push(id);
-      }
-    }
-    return reply.send({
-      questions: listResult,
-      missingIds: missingIds,
-    });
-  } catch (err) {
-    return reply.send(err);
-  }
-});
+//   try {
+//     for (var id of idsQuestion) {
+//       const result = await Database.findByPk(id);
+//       if (result) {
+//         listResult.push(result);
+//       } else {
+//         missingIds.push(id);
+//       }
+//     }
+//     return reply.send({
+//       questions: listResult,
+//       missingIds: missingIds,
+//     });
+//   } catch (err) {
+//     return reply.send(err);
+//   }
+// });
 
 (async () => {
   try {
