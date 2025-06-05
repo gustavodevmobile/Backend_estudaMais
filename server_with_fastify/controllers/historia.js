@@ -9,7 +9,7 @@ const renderHistoria = async (req, reply, discipline, schoolYear) => {
       result.map((element) => {
         const imageBase64 = element["dataValues"]["image"].toString("base64");
         element["dataValues"]["image"] = imageBase64;
-        discipline = element["dataValues"]["displice"];
+        discipline = element["dataValues"]["discipline"];
         schoolYear = element["dataValues"]["schoolYear"];
         amountQuestions = result.length;
       });

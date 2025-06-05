@@ -48,5 +48,4 @@ const Question = sequelize.define("questions", {
   //Question.sync({force:true});
 
   export default Question;
-  
-  
+

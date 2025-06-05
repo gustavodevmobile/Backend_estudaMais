@@ -425,3 +425,4 @@ export const processData = (result) => {
     amountDisciplines9C,
   };
 };
+// Garantir que todas as funções, variáveis e propriedades relacionadas a 'discipline' estejam padronizadas e consistentes.

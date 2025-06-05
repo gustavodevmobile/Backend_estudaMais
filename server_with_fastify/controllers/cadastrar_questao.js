@@ -23,7 +23,7 @@ export const cadastrar_questao = async function (req, reply) {
     await Database.create({
       elementarySchool: req.body.elementarySchool,
       schoolYear: req.body.schoolYear,
-      displice: req.body.displice,
+      discipline: req.body.discipline,
       subject: req.body.subject,
       question: req.body.question,
       image: image,

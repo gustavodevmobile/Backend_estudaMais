@@ -101,6 +101,7 @@ fastify.get("/disciplinas", async (req, reply) => {
     for (var i in result) {
       listResult.push(result[i].dataValues.discipline);
     }
+    console.log("listResult", listResult);
     var listSet = new Set(listResult);
     var listDisciplines = Array.from(listSet);
     return reply.send(listDisciplines);
@@ -216,58 +217,6 @@ fastify.post("/resultadodabusca", async (req, reply) => {
   }
 });
 
-// fastify.get("/questoes/:disciplines", async (req, reply) => {
-//   const disciplinesListJson = req.params.disciplines;
-//   const disciplinesList = JSON.parse(disciplinesListJson);
-//   //console.log(disciplinesList);
-//   var listResult = [];
-//   try {
-//     //for (var i in disciplinesList) {
-//     const result = await Database.findAll({
-//       // Seleciona apenas o campo "schoolYear"
-//       attributes: ["schoolYear"],
-//       where: {
-//         // Filtra pelas disciplinas fornecidas
-//         displice: disciplinesList,
-//       },
-//       // Garante que os anos escolares não sejam duplicados
-//       group: ["schoolYear"],
-//     });
-//     // }
-
-//     const schoolYears = result.map((item) => item.schoolYear);
-//     //console.log(schoolYears);
-//     return reply.send(listResult);
-//   } catch (err) {
-//     console.log(err);
-//     return reply.send(err);
-//   }
-// });
-
-// fastify.get("/questao/:idQuestion", async (req, reply) => {
-//   const listResult = [];
-//   const idsJson = req.params.idQuestion;
-//   const idsQuestion = JSON.parse(idsJson);
-//   const missingIds = [];
-//   console.log("idsQuestion", idsQuestion);  
-
-//   try {
-//     for (var id of idsQuestion) {
-//       const result = await Database.findByPk(id);
-//       if (result) {
-//         listResult.push(result);
-//       } else {
-//         missingIds.push(id);
-//       }
-//     }
-//     return reply.send({
-//       questions: listResult,
-//       missingIds: missingIds,
-//     });
-//   } catch (err) {
-//     return reply.send(err);
-//   }
-// });
 
 (async () => {
   try {
@@ -289,4 +238,4 @@ fastify.listen(
   }
 );
 
-//https://backend-estudamais-4ebn.onrender.com
+

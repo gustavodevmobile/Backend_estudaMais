@@ -19,7 +19,7 @@ export const editar_questao = async (req, reply) => {
       {
         elementarySchool: req.body.elementarySchool,
         schoolYear: req.body.schoolYear,
-        displice: req.body.displice,
+        discipline: req.body.discipline,
         subject: req.body.subject,
         question: req.body.question,
         image: newImage,
@@ -48,7 +48,7 @@ export const screen_editar_questao = async (req, reply) => {
       id: result.id,
       elementarySchool: result.elementarySchool,
       schoolYear: result.schoolYear,
-      displice: result.displice,
+      discipline: result.discipline,
       subject: result.subject,
       question: result.question,
       image: result.image,
